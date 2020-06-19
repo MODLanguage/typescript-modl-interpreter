@@ -3,3 +3,6 @@ node_modules
 .idea
 
 dist
+/src/Interpreter.js
+/test/Interpreter.test.js
+/src/Model.js
