@@ -6,3 +6,4 @@ dist
 /src/Interpreter.js
 /test/Interpreter.test.js
 /src/Model.js
+/src/Parser.js

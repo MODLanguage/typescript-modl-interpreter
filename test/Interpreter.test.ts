@@ -1,9 +1,6 @@
 // @ts-ignore
 import {Modl} from "../src/Model";
-// let interpreter = require('../src/Interpreter.ts');
 import {Interpreter} from '../src/Interpreter';
-
-let mocha = require('mocha');
 // @ts-ignore
 let chai = require('chai');
 
@@ -26,6 +23,11 @@ describe('TypeScript Interpreter', () => {
 
     it('should be able to parse a simple MODL string to a Modl object', () => {
         expect(new Interpreter().interpretToJsonObject('a=b')).to.eq(new Modl());
+    });
+
+    it('should be able to throw an Error on invalid MODL', () => {
+        let interpreter = new Interpreter();
+        expect(interpreter.interpretToJsonObject.bind(interpreter, 'a;b')).to.throw("line 1:1 no viable alternative at input 'a;'");
     });
 
 });
