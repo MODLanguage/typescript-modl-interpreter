@@ -1,0 +1,18 @@
+{
+  "name": "javascript_interpreter",
+  "version": "1.0.0",
+  "description": "A MODL interpreter in TypeScript",
+  "main": "bundle.js",
+  "dependencies": {
+    "antlr4": "^4.8.0",
+    "fs": "0.0.1-security",
+    "ts-loader": "^7.0.5",
+    "typescript": "^3.9.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "NUM Technology Ltd",
+  "license": "ISC"
+}
