@@ -1,7 +1,7 @@
-// @ts-ignore
-import {Modl} from "../src/Model";
-import {Interpreter} from '../src/Interpreter';
-// @ts-ignore
+// @modl-interpreter-ignore
+import {Modl} from "../src/modl-interpreter/Model";
+import {Interpreter} from '../src/modl-interpreter/Interpreter';
+// @modl-interpreter-ignore
 let chai = require('chai');
 
 const expect = chai.expect;

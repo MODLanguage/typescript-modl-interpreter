@@ -2,19 +2,19 @@ path = require('path')
 
 module.exports = {
     mode: "production",
-    entry: "./src/Interpreter.ts",
+    entry: "./src/Interpreter.modl-interpreter",
     output: {
         path: path.join(__dirname, '/dist'),
         filename: "bundle.js"
     },
     resolve: {
-        extensions: [".tsx", ".ts", ".js", ".json"]
+        extensions: [".tsx", ".modl-interpreter", ".js", ".json"]
     },
     target: "node",
     module: {
         rules: [
-            // all files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'
-            {test: /\.tsx?$/, use: ["ts-loader"], exclude: [/node_modules/, /test/]}
+            // all files with a '.modl-interpreter' or '.tsx' extension will be handled by 'modl-interpreter-loader'
+            {test: /\.tsx?$/, use: ["modl-interpreter-loader"], exclude: [/node_modules/, /test/]}
         ]
     }
 }

@@ -2,24 +2,41 @@
   "name": "javascript_interpreter",
   "version": "0.0.1",
   "description": "A MODL interpreter in TypeScript",
-  "main": "bundle.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "dependencies": {
     "antlr4": "^4.8.0",
     "fs": "0.0.1-security",
     "ts-loader": "^7.0.5",
-    "typescript": "^3.9.5"
+    "typescript": "^4.0.2"
   },
   "devDependencies": {
+    "@tsconfig/node10": "^1.0.7",
     "@types/chai": "^4.2.11",
     "@types/mocha": "^7.0.2",
     "@types/node": "^14.0.13",
     "chai": "^4.2.0",
     "mocha": "^8.0.1",
-    "ts-node": "^8.10.2"
+    "prettier": "^2.1.1",
+    "ts-node": "^8.10.2",
+    "tslint": "^6.1.3",
+    "tslint-config-prettier": "^1.18.0"
   },
   "scripts": {
-    "test": "mocha --require ts-node/register 'test/**/*.ts'"
+    "test": "mocha --require ts-node/register 'test/**/*.ts'",
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "lint": "tslint -p tsconfig.json",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
   },
   "author": "NUM Technology Ltd",
-  "license": "ISC"
+  "license": "ISC",
+  "files": [
+    "lib/**/*",
+    "gen/**/*"
+  ]
 }
