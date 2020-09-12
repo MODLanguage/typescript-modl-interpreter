@@ -1,6 +1,6 @@
-import antlr4 = require('antlr4');
-import modlParser = require('../../gen/MODL/MODLParser');
-import modlLexer = require('../../gen/MODL/MODLLexer');
+import * as antlr4 from 'antlr4';
+import * as modlParser from '../../../gen/MODL/MODLParser';
+import * as modlLexer from '../../../gen/MODL/MODLLexer';
 import { Modl } from './Model';
 import { ModlParsedVisitor } from './ModlParsedVisitor';
 
@@ -25,7 +25,7 @@ export class ParseCancellationException implements Error {
 class ThrowingErrorListener extends antlr4.error.ErrorListener {
   public static INSTANCE: ThrowingErrorListener = new ThrowingErrorListener();
 
-  syntaxError(recognizer, offendingSymbol, line:number, column:number, msg:string, e) {
+  syntaxError(recognizer, offendingSymbol, line: number, column: number, msg: string, e) {
     throw new ParseCancellationException(
       'line ' + line + ':' + column + ' ' + msg + ' ' + offendingSymbol,
       'Syntax Error',
