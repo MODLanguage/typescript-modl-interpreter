@@ -1,24 +1,24 @@
 import * as modl from './Model';
-import {Modl} from './Model';
-import {Parser} from './Parser';
+import { Modl } from './Model';
+import { Parser } from './Parser';
 
 export class Interpreter {
-  interpretToJsonString(s: string): string {
-    let modl: Modl = this.interpret(s);
+  interpretToJsonString(s: string) {
+    const modl = this.interpret(s);
     return 'fail';
   }
 
-  interpretToPrettyJsonString(s: string): string {
-    new Parser().parse(s);
+  interpretToPrettyJsonString(s: string) {
+    const modl = new Parser().parse(s);
     return 'fail';
   }
 
   interpretToJsonObject(s: string): Object {
-    new Parser().parse(s);
+    const modl = new Parser().parse(s);
     return {};
   }
 
-  interpret(s: string): modl.Modl {
+  interpret(s: string) {
     return new Parser().parse(s);
   }
 }

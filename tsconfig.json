@@ -8,7 +8,10 @@
     "removeComments": true,
     "moduleResolution": "node",
     "inlineSourceMap": true,
-    "outDir": "./lib/java-interpreter"
+    "outDir": "./lib/java-interpreter",
+    "strictNullChecks": true,
+    "alwaysStrict": true,
+    "strict": true
   },
   "exclude": [
     "node_modules",

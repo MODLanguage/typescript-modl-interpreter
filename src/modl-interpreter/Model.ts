@@ -1,2 +1,1 @@
-export class Modl {
-}
+export class Modl {}

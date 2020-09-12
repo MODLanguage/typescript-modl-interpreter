@@ -1,8 +1,8 @@
 import antlr4 = require('antlr4');
 import modlParser = require('../../gen/MODL/MODLParser');
 import modlLexer = require('../../gen/MODL/MODLLexer');
-import {Modl} from './Model';
-import {ModlParsedVisitor} from './ModlParsedVisitor';
+import { Modl } from './Model';
+import { ModlParsedVisitor } from './ModlParsedVisitor';
 
 export class Parser {
   parse(s: string): Modl {
@@ -14,24 +14,21 @@ export class Parser {
     lexer.addErrorListener(ThrowingErrorListener.INSTANCE);
     parser.addErrorListener(ThrowingErrorListener.INSTANCE);
 
-    return new ModlParsedVisitor(parser.modl()).getModl();
+    return new ModlParsedVisitor(parser.modl()).modl;
   }
 }
 
 export class ParseCancellationException implements Error {
-  message: string;
-  name: string;
-
-  constructor(m: string, n: string) {
-    this.message = m;
-    this.name = n;
-  }
+  constructor(readonly message: string, readonly name: string) {}
 }
 
 class ThrowingErrorListener extends antlr4.error.ErrorListener {
   public static INSTANCE: ThrowingErrorListener = new ThrowingErrorListener();
 
-  syntaxError(recognizer, offendingSymbol, line, column, msg, e) {
-    throw new ParseCancellationException('line ' + line + ':' + column + ' ' + msg, 'Syntax Error');
+  syntaxError(recognizer, offendingSymbol, line:number, column:number, msg:string, e) {
+    throw new ParseCancellationException(
+      'line ' + line + ':' + column + ' ' + msg + ' ' + offendingSymbol,
+      'Syntax Error',
+    );
   }
 }
