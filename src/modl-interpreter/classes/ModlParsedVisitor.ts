@@ -5,6 +5,6 @@ export class ModlParsedVisitor {
   readonly modl;
 
   constructor(ctx: modlParser.MODLContext) {
-    this.modl = new Modl();
+    this.modl = new Modl(new Array());
   }
 }

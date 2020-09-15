@@ -22,7 +22,7 @@ describe('TypeScript Interpreter', () => {
     });
 
     it('should be able to parse a simple MODL string to a Modl object', () => {
-        expect(new Interpreter().interpretToJsonObject('a=b')).to.eq(new Modl());
+        expect(new Interpreter().interpretToJsonObject('a=b')).to.eq(new Modl(new Array()));
     });
 
     it('should be able to throw an Error on invalid MODL', () => {
