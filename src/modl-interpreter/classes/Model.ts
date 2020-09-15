@@ -4,87 +4,96 @@ export class Modl {
     constructor(readonly s: Array<ModlStructure>) { }
 }
 
-type ModlStructure = ModlMap | ModlArray | ModlTopLevelConditional | ModlPair;
+export type ModlStructure = ModlMap | ModlArray | ModlTopLevelConditional | ModlPair;
 
-class ModlMap {
+export class ModlMap {
     constructor(readonly items: Array<ModlMapItem>) { }
 }
 
-class ModlArray {
+export class ModlArray {
     constructor(readonly items: Array<ModlArrayItem | ModlNbArray>) { }
 }
 
-class ModlNbArray {
+export class ModlNbArray {
     constructor(readonly items: Array<ModlArrayItem>) { }
 }
 
-class ModlPair {
+export class ModlPair {
     constructor(readonly key: string | ModlQuoted, readonly value: ModlValueItem | ModlMap | ModlArray) { }
 }
 
-type ModlValueItem = ModlMap | ModlPair | ModlArray | ModlNbArray | ModlPrimitive | ModlValueConditional;
+export type ModlValueItem = ModlMap | ModlPair | ModlArray | ModlNbArray | ModlPrimitive | ModlValueConditional;
 
-class ModlTopLevelConditional {
+export class ModlTopLevelConditional {
     constructor(readonly test: ModlConditionTest, readonly ret: ModlTopLevelConditionalReturn, readonly clauses: Array<[Option<ModlConditionTest>, ModlTopLevelConditionalReturn]>) { }
 }
-class ModlTopLevelConditionalReturn {
+
+export class ModlTopLevelConditionalReturn {
     constructor(readonly x: ModlStructure, readonly xs: Array<ModlStructure>) { }
 }
 
-class ModlMapConditional {
+export class ModlMapConditional {
     constructor(readonly test: ModlConditionTest, readonly ret: ModlMapConditionalReturn, readonly clauses: Array<[Option<ModlConditionTest>, ModlMapConditionalReturn]>) { }
 }
-class ModlMapConditionalReturn {
+
+export class ModlMapConditionalReturn {
     constructor(readonly x: ModlMapItem, readonly xs: Array<ModlMapItem>) { }
 }
-type ModlMapItem = ModlPair | ModlMapConditional;
 
-class ModlArrayConditional {
+export type ModlMapItem = ModlPair | ModlMapConditional;
+
+export class ModlArrayConditional {
     constructor(readonly test: ModlConditionTest, readonly ret: ModlArrayConditionalReturn, readonly clauses: Array<[Option<ModlConditionTest>, ModlArrayConditionalReturn]>) { }
 }
-class ModlArrayConditionalReturn {
+
+export class ModlArrayConditionalReturn {
     constructor(readonly x: ModlArrayItem, readonly xs: Array<ModlArrayItem>) { }
 }
-type ModlArrayItem = ModlArrayValueItem | ModlArrayConditional;
 
-class ModlValueConditional {
+export type ModlArrayItem = ModlArrayValueItem | ModlArrayConditional;
+
+export class ModlValueConditional {
     constructor(readonly test: ModlConditionTest, readonly clause: Option<[ModlValueConditionalReturn, Array<[ModlConditionTest, ModlValueConditionalReturn]>, ModlValueConditionalReturn]>) { }
 }
-class ModlValueConditionalReturn {
+
+export class ModlValueConditionalReturn {
     constructor(readonly x: ModlValueItem, readonly xs: Array<ModlValueItem>) { }
 }
 
-type Conjunction = '&' | '|';
-class ModlConditionTest {
+export type Conjunction = '&' | '|';
+
+export class ModlConditionTest {
     constructor(readonly invert: boolean, readonly x: ModlCondition | ModlConditionGroup, readonly xs: Array<[Conjunction, Option<boolean>, ModlCondition | ModlConditionGroup]>) { }
 }
 
-type ModlOperator = '=' | '>' | '>=' | '<' | '<=' | '!=';
+export type ModlOperator = '=' | '>' | '>=' | '<' | '<=' | '!=';
 
-class ModlCondition {
+export class ModlCondition {
     constructor(readonly s: Option<string>, readonly op: Option<ModlOperator>, readonly v: ModlValue, readonly vs: Array<ModlValue>) { }
 }
-class ModlConditionGroup {
+
+export class ModlConditionGroup {
     constructor(readonly t: ModlConditionTest, readonly ts: Array<[Conjunction, ModlConditionTest]>) { }
 }
 
-type ModlValue = ModlMap | ModlPair | ModlArray | ModlNbArray | ModlPrimitive;
+export type ModlValue = ModlMap | ModlPair | ModlArray | ModlNbArray | ModlPrimitive;
 
-type ModlArrayValueItem = ModlMap | ModlPair | ModlArray | ModlPrimitive;
+export type ModlArrayValueItem = ModlMap | ModlPair | ModlArray | ModlPrimitive;
 
-type ModlPrimitive = ModlQuoted | ModlNumber | ModlString | ModlTrue | ModlFalse | ModlNull;
+export type ModlPrimitive = ModlQuoted | ModlNumber | ModlString | ModlTrue | ModlFalse | ModlNull;
 
-class ModlNumber {
+export class ModlNumber {
     constructor(readonly value: number) { }
 }
 
-class ModlQuoted {
-    constructor(readonly value: string) { }
-}
-class ModlString {
+export class ModlQuoted {
     constructor(readonly value: string) { }
 }
 
-class ModlTrue { }
-class ModlFalse { }
-class ModlNull { }
+export class ModlString {
+    constructor(readonly value: string) { }
+}
+
+export class ModlTrue { }
+export class ModlFalse { }
+export class ModlNull { }
