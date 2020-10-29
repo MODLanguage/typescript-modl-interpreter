@@ -25,9 +25,9 @@
     "tslint-config-prettier": "^1.18.0"
   },
   "scripts": {
-    "test": "npm run build && mocha --require ts-node/register 'test/**/*.ts'",
     "build": "tsc",
-    "format": "prettier --write \"src/**/*.ts\"",
+    "test": "npm run build && mocha --require ts-node/register 'test/**/*.ts'",
+    "format": "prettier --write \"lib/**/*.ts\"",
     "lint": "tslint -p tsconfig.json",
     "prepare": "npm run build",
     "prepublishOnly": "npm test && npm run lint",

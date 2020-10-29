@@ -1,6 +1,5 @@
 // @modl-interpreter-ignore
-import {Modl} from "../lib/modl-interpreter/classes/Model";
-import {Interpreter} from '../lib/modl-interpreter/classes/Interpreter';
+import { Interpreter } from '../lib/modl-interpreter/classes/Interpreter';
 // @modl-interpreter-ignore
 let chai = require('chai');
 
@@ -12,9 +11,7 @@ describe('TypeScript Interpreter', () => {
     });
 
     it('should be able to parse a simple MODL string to a pretty JSON String', () => {
-        expect(new Interpreter().interpretToPrettyJsonString('a=b')).to.equal('{\n' +
-            '    "a": "b"\n' +
-            '}');
+        expect(new Interpreter().interpretToPrettyJsonString('a=b')).to.equal('{"a": "b"}');
     });
 
     it('should be able to parse a simple MODL string to a JSON object', () => {
@@ -22,7 +19,8 @@ describe('TypeScript Interpreter', () => {
     });
 
     it('should be able to parse a simple MODL string to a Modl object', () => {
-        expect(new Interpreter().interpretToJsonObject('a=b')).to.eq(new Modl(new Array()));
+        const jsonObject = new Interpreter().interpretToJsonObject('a=b');
+        expect(JSON.stringify(jsonObject)).to.eq('{"a":"b"}');
     });
 
     it('should be able to throw an Error on invalid MODL', () => {

@@ -1,25 +1,22 @@
-import { Ancestry } from './Ancestry';
-import * as modl from './Model';
-import { Modl } from './Model';
 import { Parser } from './Parser';
 
 export class Interpreter {
   interpretToJsonString(s: string) {
     const modl = this.interpret(s);
-    return 'fail';
+    return JSON.stringify(modl);
   }
 
   interpretToPrettyJsonString(s: string) {
-    const modl = new Parser().parse(s, new Ancestry());
-    return 'fail';
+    const modl = new Parser().parse(s);
+    return JSON.stringify(modl);
   }
 
   interpretToJsonObject(s: string): Object {
-    const modl = new Parser().parse(s, new Ancestry());
-    return {};
+    const modl = new Parser().parse(s);
+    return JSON.stringify(modl);
   }
 
   interpret(s: string) {
-    return new Parser().parse(s, new Ancestry());
+    return new Parser().parse(s);
   }
 }

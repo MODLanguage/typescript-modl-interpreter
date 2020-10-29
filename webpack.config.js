@@ -2,7 +2,7 @@ path = require('path')
 
 module.exports = {
     mode: "production",
-    entry: "./src/Interpreter.modl-interpreter",
+    entry: "./lib/Interpreter.modl-interpreter",
     output: {
         path: path.join(__dirname, '/dist'),
         filename: "bundle.js"
