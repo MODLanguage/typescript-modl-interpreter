@@ -2,8 +2,8 @@
   "name": "javascript_interpreter",
   "version": "0.0.1",
   "description": "A MODL interpreter in TypeScript",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "dependencies": {
     "antlr4": "^4.7.2",
     "fp-ts": "^2.8.2",
