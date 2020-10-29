@@ -1,3 +1,5 @@
+import { Eq } from "fp-ts/lib/Eq";
+import { Monoid } from "fp-ts/lib/Monoid";
 import { Option } from "fp-ts/lib/Option";
 
 export class Modl {
@@ -80,7 +82,7 @@ export type ModlValue = ModlMap | ModlPair | ModlArray | ModlNbArray | ModlPrimi
 
 export type ModlArrayValueItem = ModlMap | ModlPair | ModlArray | ModlPrimitive;
 
-export type ModlPrimitive = ModlQuoted | ModlNumber | ModlString | ModlTrue | ModlFalse | ModlNull;
+export type ModlPrimitive = ModlQuoted | ModlNumber | ModlString | ModlBoolNull;
 
 export class ModlNumber {
     constructor(readonly value: number) { }
@@ -94,6 +96,4 @@ export class ModlString {
     constructor(readonly value: string) { }
 }
 
-export class ModlTrue { }
-export class ModlFalse { }
-export class ModlNull { }
+export enum ModlBoolNull { ModlTrue, ModlFalse, ModlNull }

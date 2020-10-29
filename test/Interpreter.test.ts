@@ -1,6 +1,6 @@
 // @modl-interpreter-ignore
-import {Modl} from "../src/modl-interpreter/classes/Model";
-import {Interpreter} from '../src/modl-interpreter/classes/Interpreter';
+import {Modl} from "../lib/modl-interpreter/classes/Model";
+import {Interpreter} from '../lib/modl-interpreter/classes/Interpreter';
 // @modl-interpreter-ignore
 let chai = require('chai');
 
