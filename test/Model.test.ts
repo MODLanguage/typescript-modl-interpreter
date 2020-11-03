@@ -3,7 +3,7 @@ import {
   ModlPair,
   ModlQuoted,
   ModlString,
-} from '../lib/modl-interpreter/classes/Model';
+} from '../lib/modl-interpreter/Model';
 // @modl-interpreter-ignore
 // tslint:disable-next-line:no-var-requires
 const chai = require('chai');

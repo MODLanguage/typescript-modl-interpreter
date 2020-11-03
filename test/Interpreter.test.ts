@@ -1,5 +1,5 @@
 // @modl-interpreter-ignore
-import { Interpreter } from '../lib/modl-interpreter/classes/Interpreter';
+import { Interpreter } from '../lib/modl-interpreter/Interpreter';
 // @modl-interpreter-ignore
 let chai = require('chai');
 

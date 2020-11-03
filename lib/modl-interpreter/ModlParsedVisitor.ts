@@ -13,15 +13,10 @@ import {
   ModlValueItem,
 } from './Model';
 
-export class ModlParsedVisitor {
-  // Visit a parse tree produced by MODLParser#modl.
-  visitModl(ctx) {
-    const structures = ctx.children
-      .filter(nonTerminal)
-      .map(visitModl_structure);
+export function visitModl(ctx: any): Modl {
+  const structures = ctx.children.filter(nonTerminal).map(visitModl_structure);
 
-    return new Modl(structures);
-  }
+  return new Modl(structures);
 }
 
 function nonTerminal(ctx): boolean {

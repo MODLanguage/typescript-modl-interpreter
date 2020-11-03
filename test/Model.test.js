@@ -1,7 +1,7 @@
 "use strict";
 exports.__esModule = true;
 // @modl-interpreter-ignore
-var Model_1 = require("../lib/modl-interpreter/classes/Model");
+var Model_1 = require("../lib/modl-interpreter/Model");
 // @modl-interpreter-ignore
 // tslint:disable-next-line:no-var-requires
 var chai = require('chai');

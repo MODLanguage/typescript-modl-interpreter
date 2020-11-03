@@ -1,8 +1,8 @@
 import * as antlr4 from 'antlr4';
-import * as modlParser from '../../gen/MODL/MODLParser';
-import * as modlLexer from '../../gen/MODL/MODLLexer';
+import * as modlParser from '../gen/MODL/MODLParser';
+import * as modlLexer from '../gen/MODL/MODLLexer';
 import { Modl } from './Model';
-import { ModlParsedVisitor } from './ModlParsedVisitor';
+import { visitModl } from './ModlParsedVisitor';
 import { ErrorListener } from 'antlr4/error/ErrorListener';
 import { Recognizer } from 'antlr4';
 
@@ -17,8 +17,7 @@ export class Parser {
     parser.addErrorListener(ThrowingErrorListener.INSTANCE);
 
     const context = parser.modl();
-    const visitor = new ModlParsedVisitor();
-    return visitor.visitModl(context);
+    return visitModl(context);
   }
 }
 
