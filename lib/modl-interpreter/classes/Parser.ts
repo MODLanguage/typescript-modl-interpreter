@@ -29,14 +29,23 @@ export class ParseCancellationException implements Error {
 class ThrowingErrorListener extends ErrorListener {
   public static INSTANCE: ThrowingErrorListener = new ThrowingErrorListener();
 
-  syntaxError(recognizer: Recognizer, offendingSymbol, line: number, column: number, msg: string, e) {
+  syntaxError(
+    recognizer: Recognizer,
+    offendingSymbol,
+    line: number,
+    column: number,
+    msg: string,
+    e
+  ) {
     if (recognizer) {
-      throw new ParseCancellationException(
-        'line ' + line + ':' + column + ' ' + msg + ' ' + offendingSymbol + ' ' + JSON.stringify(e),
-        'Syntax Error',
-      );
+      const estr = JSON.stringify(e);
+      const message = `line ${line}:${column} ${msg} ${offendingSymbol} ${estr}`;
+      throw new ParseCancellationException(message, 'Syntax Error');
     } else {
-      throw new ParseCancellationException("'recognizer' parameter not present", 'Bad Parameter');
+      throw new ParseCancellationException(
+        "'recognizer' parameter not present",
+        'Bad Parameter'
+      );
     }
   }
 }

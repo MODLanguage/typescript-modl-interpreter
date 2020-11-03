@@ -11,9 +11,9 @@ export class Interpreter {
     return JSON.stringify(modl);
   }
 
-  interpretToJsonObject(s: string): Object {
+  interpretToJsonObject(s: string): object {
     const modl = new Parser().parse(s);
-    return JSON.stringify(modl);
+    return JSON.parse(JSON.stringify(modl));
   }
 
   interpret(s: string) {

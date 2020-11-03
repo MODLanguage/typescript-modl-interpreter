@@ -25,16 +25,16 @@
     "tslint-config-prettier": "^1.18.0"
   },
   "scripts": {
+    "test": "mocha --require ts-node/register 'test/**/*.ts'",
+    "version": "git add -A .",
+    "pretest": "npm run format && npm run lint && npm run build",
+    "preversion": "npm run format && npm run lint && npm run doc && npm run build",
     "build": "tsc",
-    "test": "npm run build && mocha --require ts-node/register 'test/**/*.ts'",
-    "format": "prettier --write \"lib/**/*.ts\"",
-    "lint": "tslint -p tsconfig.json",
-    "prepare": "npm run build",
-    "prepublishOnly": "npm test && npm run lint",
-    "preversion": "npm run lint",
-    "version": "npm run format && git add -A src",
-    "postversion": "git push && git push --tags"
-  },
+    "doc": "typedoc",
+    "format": "prettier --write \"**/*.ts\"",
+    "lint": "tslint --fix -p tsconfig.json",
+    "prepublish": "npm test",
+    "publish": "git push && git push --tags"  },
   "author": "NUM Technology Ltd",
   "license": "ISC",
   "files": [

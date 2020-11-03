@@ -1,32 +1,45 @@
 export class Modl {
-  constructor(readonly s: Array<ModlStructure>) {}
+  constructor(readonly s: ModlStructure[]) {}
 }
 
 export type ModlStructure = ModlMap | ModlArray | ModlPair;
 
 export class ModlMap {
-  constructor(readonly items: Array<ModlMapItem>) {}
+  constructor(readonly items: ModlMapItem[]) {}
 }
 
 export class ModlArray {
-  constructor(readonly items: Array<ModlArrayItem | ModlNbArray>) {}
+  constructor(readonly items: ModlArrayItem | ModlNbArray[]) {}
 }
 
 export class ModlNbArray {
-  constructor(readonly items: Array<ModlArrayItem>) {}
+  constructor(readonly items: ModlArrayItem[]) {}
 }
 
 export class ModlPair {
-  constructor(readonly key: string | ModlQuoted, readonly value: ModlValueItem | ModlMap | ModlArray) {}
+  constructor(
+    readonly key: string | ModlQuoted,
+    readonly value: ModlValueItem | ModlMap | ModlArray
+  ) {}
 }
 
-export type ModlValueItem = ModlMap | ModlPair | ModlArray | ModlNbArray | ModlPrimitive;
+export type ModlValueItem =
+  | ModlMap
+  | ModlPair
+  | ModlArray
+  | ModlNbArray
+  | ModlPrimitive;
 
 export type ModlMapItem = ModlPair;
 
 export type ModlArrayItem = ModlArrayValueItem;
 
-export type ModlValue = ModlMap | ModlPair | ModlArray | ModlNbArray | ModlPrimitive;
+export type ModlValue =
+  | ModlMap
+  | ModlPair
+  | ModlArray
+  | ModlNbArray
+  | ModlPrimitive;
 
 export type ModlArrayValueItem = ModlMap | ModlPair | ModlArray | ModlPrimitive;
 
