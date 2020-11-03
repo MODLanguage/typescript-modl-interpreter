@@ -9,7 +9,7 @@ export class ModlMap {
 }
 
 export class ModlArray {
-  constructor(readonly items: ModlArrayItem | ModlNbArray[]) {}
+  constructor(readonly items: [ModlArrayItem | ModlNbArray]) {}
 }
 
 export class ModlNbArray {

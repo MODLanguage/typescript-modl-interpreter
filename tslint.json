@@ -58,7 +58,7 @@
     "comment-format": true,
     "interface-over-type-literal": true,
     "newline-per-chained-call": false,
-    "prefer-switch": true,
+    "prefer-switch": false,
     "prefer-while": true,
     "switch-final-break": true,
     "align": true,
