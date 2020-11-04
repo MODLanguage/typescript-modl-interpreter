@@ -20,8 +20,13 @@ export const modlToJson = (modl: Modl): object => {
       if (structure instanceof ModlPair) {
         pairToJson(structure, result);
       }
+      if (structure instanceof ModlMap) {
+        mapToJson(structure, result);
+      }
       if (structure instanceof ModlArray) {
-        arrayToJson(structure);
+        throw new Error(
+          'Array cannot be stored directly in a map, it must be a pair'
+        );
       }
     });
     return result;
@@ -33,7 +38,7 @@ const toJson = (x: ModlValueItem): any => {
     return arrayToJson(x);
   }
   if (x instanceof ModlMap) {
-    return mapToJson(x);
+    return mapToJson(x, {});
   }
   if (x instanceof ModlPair) {
     return pairToJson(x, {});
@@ -42,13 +47,13 @@ const toJson = (x: ModlValueItem): any => {
     return arrayToJson(x);
   }
   if (x instanceof ModlQuoted) {
-    return x.value;
+    return unquote(x.value);
   }
   if (x instanceof ModlNumber) {
     return x.value;
   }
   if (x instanceof ModlString) {
-    return x.value;
+    return unquote(x.value);
   }
   if (x === ModlBoolNull.ModlFalse) {
     return false;
@@ -57,22 +62,21 @@ const toJson = (x: ModlValueItem): any => {
     return true;
   }
   if (x === ModlBoolNull.ModlNull) {
-    return undefined;
+    return null;
   }
   return x;
 };
 
 function pairToJson(p: ModlPair, result: object) {
   if (p.key instanceof ModlQuoted) {
-    result[p.key.value] = toJson(p.value);
+    result[unquote(p.key.value)] = toJson(p.value);
   } else {
-    result[p.key] = toJson(p.value);
+    result[unquote(p.key)] = toJson(p.value);
   }
   return result;
 }
 
-function mapToJson(m: ModlMap): object {
-  const result = {};
+function mapToJson(m: ModlMap, result: object): object {
   m.items.forEach((i) => {
     pairToJson(i, result);
   });
@@ -85,26 +89,36 @@ function arrayToJson(a: ModlArray | ModlNbArray): object {
     if (x instanceof ModlArray) {
       result.push(arrayToJson(x));
     } else if (x instanceof ModlMap) {
-      result.push(mapToJson(x));
+      result.push(mapToJson(x, {}));
     } else if (x instanceof ModlPair) {
       result.push(pairToJson(x, {}));
     } else if (x instanceof ModlNbArray) {
       result.push(arrayToJson(x));
     } else if (x instanceof ModlQuoted) {
-      result.push(x.value);
+      result.push(unquote(x.value));
     } else if (x instanceof ModlNumber) {
       result.push(x.value);
     } else if (x instanceof ModlString) {
-      result.push(x.value);
+      result.push(unquote(x.value));
     } else if (x === ModlBoolNull.ModlFalse) {
       result.push(false);
     } else if (x === ModlBoolNull.ModlTrue) {
       result.push(true);
     } else if (x === ModlBoolNull.ModlNull) {
-      result.push(undefined);
+      result.push(null);
     } else {
       result.push(x);
     }
   });
   return result;
 }
+
+const unquote = (s: string): string => {
+  if (
+    (s.startsWith('`') && s.endsWith('`')) ||
+    (s.startsWith('"') && s.endsWith('"'))
+  ) {
+    return s.substring(1, s.length - 1);
+  }
+  return s;
+};

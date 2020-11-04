@@ -1,10 +1,8 @@
-// @modl-interpreter-ignore
 import {
   ModlPair,
   ModlQuoted,
   ModlString,
 } from '../lib/modl-interpreter/Model';
-// @modl-interpreter-ignore
 
 import { expect } from 'chai';
 

@@ -1,9 +1,6 @@
-// @modl-interpreter-ignore
 import { Interpreter } from '../lib/modl-interpreter/Interpreter';
-// @modl-interpreter-ignore
-let chai = require('chai');
+import { expect } from 'chai';
 
-const expect = chai.expect;
 describe('TypeScript Interpreter', () => {
   it('should be able to parse a simple MODL string to a JSON String', () => {
     expect(new Interpreter().interpretToJsonString('a=b')).to.equal(

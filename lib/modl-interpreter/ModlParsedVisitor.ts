@@ -2,9 +2,11 @@ import {
   Modl,
   ModlArray,
   ModlArrayValueItem,
+  ModlBoolNull,
   ModlMap,
   ModlMapItem,
   ModlNbArray,
+  ModlNumber,
   ModlPair,
   ModlPrimitive,
   ModlString,
@@ -67,6 +69,9 @@ function visitModl_nb_array(ctx): ModlNbArray {
 function visitModl_pair(ctx): ModlPair {
   const key = ctx.children[0].getText();
 
+  if (keyIsInvalid(key)) {
+    throw new Error(`Interpreter Error: invalid key: '${key}'`);
+  }
   const value =
     ctx.children[1].__proto__.constructor.name === 'TerminalNodeImpl'
       ? ctx.children[2]
@@ -94,7 +99,25 @@ function visitModl_array_value_item(ctx): ModlArrayValueItem {
 
 // Visit a parse tree produced by MODLParser#modl_primitive.
 function visitModl_primitive(ctx): ModlPrimitive {
-  return new ModlString(ctx.getText());
+  const text = ctx.getText();
+  if (!text || text === 'null' || text === '000') {
+    return ModlBoolNull.ModlNull;
+  }
+  if (text === 'false' || text === '00') {
+    return ModlBoolNull.ModlFalse;
+  }
+  if (text === 'true' || text === '01') {
+    return ModlBoolNull.ModlTrue;
+  }
+  const intValue = Number.parseInt(text, 10);
+  if (intValue.toString() === text) {
+    return new ModlNumber(intValue);
+  }
+  const floatValue = Number.parseFloat(text);
+  if (floatValue.toString() === text) {
+    return new ModlNumber(floatValue);
+  }
+  return new ModlString(text);
 }
 
 function visitChild(child) {
@@ -123,4 +146,16 @@ function visitChild(child) {
       console.error(`Unknown object: ${childClassName}`);
       return new ModlString(`Unknown object: ${childClassName}`);
   }
+}
+
+function keyIsInvalid(k: string): boolean {
+  if (
+    !k ||
+    Number.parseInt(k, 10).toString() === k ||
+    Number.parseFloat(k).toString() === k ||
+    k.startsWith('%')
+  ) {
+    return true;
+  }
+  return false;
 }
