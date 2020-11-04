@@ -10,6 +10,8 @@
 - boolean
 - null
 - key validation
+- Comments
+- Basic Type inference
 ## Level 1
 ## Level 2
 ## Level 3
@@ -23,8 +25,6 @@
 - Immutable keys
 - Hidden keys
 - Instructions
-- Type inference
-- Comments
 - Object referencing
 - Deep object referencing
 - Object index

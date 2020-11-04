@@ -69,9 +69,8 @@ function visitModl_nb_array(ctx): ModlNbArray {
 function visitModl_pair(ctx): ModlPair {
   const key = ctx.children[0].getText();
 
-  if (keyIsInvalid(key)) {
-    throw new Error(`Interpreter Error: invalid key: '${key}'`);
-  }
+  validateKey(key);
+
   const value =
     ctx.children[1].__proto__.constructor.name === 'TerminalNodeImpl'
       ? ctx.children[2]
@@ -148,14 +147,20 @@ function visitChild(child) {
   }
 }
 
-function keyIsInvalid(k: string): boolean {
+function validateKey(k: string) {
+  const key = k && k.startsWith('_') ? k.substr(1) : k;
   if (
-    !k ||
-    Number.parseInt(k, 10).toString() === k ||
-    Number.parseFloat(k).toString() === k ||
-    k.startsWith('%')
+    Number.parseInt(key, 10).toString() === key ||
+    Number.parseFloat(key).toString() === key
   ) {
-    return true;
+    throw new Error(
+      `Interpreter Error: Invalid key - "${key}" - entirely numeric keys are not allowed: ${k}`
+    );
   }
-  return false;
+
+  if (key.includes('%')) {
+    throw new Error(
+      `Interpreter Error: Invalid key - spaces and % characters are not allowed: ${k}`
+    );
+  }
 }
