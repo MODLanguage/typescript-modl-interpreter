@@ -15,17 +15,31 @@ import {
   ModlValueItem,
 } from './Model';
 
+/**
+ * Visits modl
+ * @param ctx
+ * @returns modl
+ */
 export function visitModl(ctx: any): Modl {
   const structures = ctx.children.filter(nonTerminal).map(visitModl_structure);
 
   return new Modl(structures);
 }
 
+/**
+ * Nons terminal
+ * @param ctx
+ * @returns true if terminal
+ */
 function nonTerminal(ctx): boolean {
   return ctx.__proto__.constructor.name !== 'TerminalNodeImpl';
 }
 
-// Visit a parse tree produced by MODLParser#modl_structure.
+/**
+ * Visits modl structure
+ * @param ctx
+ * @returns modl structure
+ */
 function visitModl_structure(ctx): ModlStructure {
   const ctxClassName = ctx.__proto__.constructor.name;
 
@@ -46,26 +60,42 @@ function visitModl_structure(ctx): ModlStructure {
   return new ModlMap(new Array<ModlMapItem>());
 }
 
-// Visit a parse tree produced by MODLParser#modl_map.
+/**
+ * Visits modl map
+ * @param ctx
+ * @returns modl map
+ */
 function visitModl_map(ctx): ModlMap {
   const children = ctx.children.filter(nonTerminal).map(visitChild);
 
   return new ModlMap(children);
 }
 
-// Visit a parse tree produced by MODLParser#modl_array.
+/**
+ * Visits modl array
+ * @param ctx
+ * @returns modl array
+ */
 function visitModl_array(ctx): ModlArray {
   const children = ctx.children.filter(nonTerminal).map(visitChild);
   return new ModlArray(children);
 }
 
-// Visit a parse tree produced by MODLParser#modl_nb_array.
+/**
+ * Visits modl nb array
+ * @param ctx
+ * @returns modl nb array
+ */
 function visitModl_nb_array(ctx): ModlNbArray {
   const children = ctx.children.filter(nonTerminal).map(visitChild);
   return new ModlNbArray(children);
 }
 
-// Visit a parse tree produced by MODLParser#modl_pair.
+/**
+ * Visits modl pair
+ * @param ctx
+ * @returns modl pair
+ */
 function visitModl_pair(ctx): ModlPair {
   const key = ctx.children[0].getText();
 
@@ -81,22 +111,38 @@ function visitModl_pair(ctx): ModlPair {
   return new ModlPair(key, pairValue);
 }
 
-// Visit a parse tree produced by MODLParser#modl_value_item.
+/**
+ * Visits modl value item
+ * @param ctx
+ * @returns modl value item
+ */
 function visitModl_value_item(ctx): ModlValueItem {
   return visitChild(ctx.children[0]);
 }
 
-// Visit a parse tree produced by MODLParser#modl_value.
+/**
+ * Visits modl value
+ * @param ctx
+ * @returns modl value
+ */
 function visitModl_value(ctx): ModlValue {
   return visitChild(ctx.children[0]);
 }
 
-// Visit a parse tree produced by MODLParser#modl_array_value_item.
+/**
+ * Visits modl array value item
+ * @param ctx
+ * @returns modl array value item
+ */
 function visitModl_array_value_item(ctx): ModlArrayValueItem {
   return visitChild(ctx.children[0]) as ModlArrayValueItem;
 }
 
-// Visit a parse tree produced by MODLParser#modl_primitive.
+/**
+ * Visits modl primitive
+ * @param ctx
+ * @returns modl primitive
+ */
 function visitModl_primitive(ctx): ModlPrimitive {
   const text = ctx.getText();
   if (!text || text === 'null' || text === '000') {
@@ -119,6 +165,11 @@ function visitModl_primitive(ctx): ModlPrimitive {
   return new ModlString(text);
 }
 
+/**
+ * Visits child
+ * @param child
+ * @returns
+ */
 function visitChild(child) {
   const childClassName = child.__proto__.constructor.name;
 
@@ -147,6 +198,10 @@ function visitChild(child) {
   }
 }
 
+/**
+ * Validates key
+ * @param k
+ */
 function validateKey(k: string) {
   const key = k && k.startsWith('_') ? k.substr(1) : k;
   if (

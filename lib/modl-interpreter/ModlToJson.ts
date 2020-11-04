@@ -11,7 +11,12 @@ import {
   ModlBoolNull,
 } from './Model';
 
-export const modlToJson = (modl: Modl): object => {
+/**
+ * Modls to json
+ * @param modl
+ * @returns to json
+ */
+export function modlToJson(modl: Modl): object {
   if (modl.s.length === 1 && modl.s[0] instanceof ModlArray) {
     return arrayToJson(modl.s[0]);
   } else {
@@ -31,9 +36,14 @@ export const modlToJson = (modl: Modl): object => {
     });
     return result;
   }
-};
+}
 
-const toJson = (x: ModlValueItem): any => {
+/**
+ * To json
+ * @param x
+ * @returns json
+ */
+function toJson(x: ModlValueItem): any {
   if (x instanceof ModlArray) {
     return arrayToJson(x);
   }
@@ -65,8 +75,14 @@ const toJson = (x: ModlValueItem): any => {
     return null;
   }
   return x;
-};
+}
 
+/**
+ * Pairs to json
+ * @param p
+ * @param result
+ * @returns
+ */
 function pairToJson(p: ModlPair, result: object) {
   if (p.key instanceof ModlQuoted) {
     result[unquote(p.key.value)] = toJson(p.value);
@@ -76,6 +92,12 @@ function pairToJson(p: ModlPair, result: object) {
   return result;
 }
 
+/**
+ * Maps to json
+ * @param m
+ * @param result
+ * @returns to json
+ */
 function mapToJson(m: ModlMap, result: object): object {
   m.items.forEach((i) => {
     pairToJson(i, result);
@@ -83,6 +105,11 @@ function mapToJson(m: ModlMap, result: object): object {
   return result;
 }
 
+/**
+ * Arrays to json
+ * @param a
+ * @returns to json
+ */
 function arrayToJson(a: ModlArray | ModlNbArray): object {
   const result = new Array();
   a.items.forEach((x) => {
@@ -113,7 +140,7 @@ function arrayToJson(a: ModlArray | ModlNbArray): object {
   return result;
 }
 
-const unquote = (s: string): string => {
+function unquote(s: string): string {
   if (
     (s.startsWith('`') && s.endsWith('`')) ||
     (s.startsWith('"') && s.endsWith('"'))
@@ -121,4 +148,4 @@ const unquote = (s: string): string => {
     return s.substring(1, s.length - 1);
   }
   return s;
-};
+}

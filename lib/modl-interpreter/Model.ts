@@ -1,3 +1,6 @@
+/**
+ * Modl
+ */
 export class Modl {
   constructor(readonly s: ModlStructure[]) {}
 }
@@ -8,14 +11,23 @@ export class ModlMap {
   constructor(readonly items: ModlMapItem[]) {}
 }
 
+/**
+ * Modl array
+ */
 export class ModlArray {
   constructor(readonly items: [ModlArrayItem | ModlNbArray]) {}
 }
 
+/**
+ * Modl nb array
+ */
 export class ModlNbArray {
   constructor(readonly items: ModlArrayItem[]) {}
 }
 
+/**
+ * Modl pair
+ */
 export class ModlPair {
   constructor(
     readonly key: string | ModlQuoted,
@@ -45,18 +57,30 @@ export type ModlArrayValueItem = ModlMap | ModlPair | ModlArray | ModlPrimitive;
 
 export type ModlPrimitive = ModlQuoted | ModlNumber | ModlString | ModlBoolNull;
 
+/**
+ * Modl number
+ */
 export class ModlNumber {
   constructor(readonly value: number) {}
 }
 
+/**
+ * Modl quoted
+ */
 export class ModlQuoted {
   constructor(readonly value: string) {}
 }
 
+/**
+ * Modl string
+ */
 export class ModlString {
   constructor(readonly value: string) {}
 }
 
+/**
+ * Modl bool null
+ */
 export enum ModlBoolNull {
   ModlTrue,
   ModlFalse,
