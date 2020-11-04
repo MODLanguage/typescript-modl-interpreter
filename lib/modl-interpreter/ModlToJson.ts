@@ -16,11 +16,12 @@ import {
  * @param modl
  * @returns to json
  */
-export function modlToJson(modl: Modl): object {
+export function modlToJson(modl: Modl): object | null {
   if (modl.s.length === 1 && modl.s[0] instanceof ModlArray) {
     return arrayToJson(modl.s[0]);
   } else {
     const result = {};
+
     modl.s.forEach((structure) => {
       if (structure instanceof ModlPair) {
         pairToJson(structure, result);
@@ -29,12 +30,11 @@ export function modlToJson(modl: Modl): object {
         mapToJson(structure, result);
       }
       if (structure instanceof ModlArray) {
-        throw new Error(
-          'Array cannot be stored directly in a map, it must be a pair'
-        );
+        throw new Error('Array cannot be stored directly in a map, it must be a pair');
       }
     });
-    return result;
+
+    return (Object.keys(result).length === 0) ? null : result;
   }
 }
 
@@ -84,10 +84,9 @@ function toJson(x: ModlValueItem): any {
  * @returns
  */
 function pairToJson(p: ModlPair, result: object) {
-  if (p.key instanceof ModlQuoted) {
-    result[unquote(p.key.value)] = toJson(p.value);
-  } else {
-    result[unquote(p.key)] = toJson(p.value);
+  const key = p.key instanceof ModlQuoted ? unquote(p.key.value) : unquote(p.key);
+  if (!key.startsWith('_')) {
+    result[key] = toJson(p.value);
   }
   return result;
 }
@@ -141,11 +140,5 @@ function arrayToJson(a: ModlArray | ModlNbArray): object {
 }
 
 function unquote(s: string): string {
-  if (
-    (s.startsWith('`') && s.endsWith('`')) ||
-    (s.startsWith('"') && s.endsWith('"'))
-  ) {
-    return s.substring(1, s.length - 1);
-  }
-  return s;
+  return ((s.startsWith('`') && s.endsWith('`')) || (s.startsWith('"') && s.endsWith('"'))) ? s.substring(1, s.length - 1) : s;
 }

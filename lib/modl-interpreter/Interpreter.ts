@@ -11,8 +11,7 @@ export class Interpreter {
    * @returns
    */
   interpretToJsonString(s: string) {
-    const modl = this.interpret(s);
-    const jsonObject = modlToJson(modl);
+    const jsonObject = this.interpretToJsonObject(s);
     return JSON.stringify(jsonObject);
   }
 
@@ -22,8 +21,7 @@ export class Interpreter {
    * @returns
    */
   interpretToPrettyJsonString(s: string) {
-    const modl = this.interpret(s);
-    const jsonObject = modlToJson(modl);
+    const jsonObject = this.interpretToJsonObject(s);
     return JSON.stringify(jsonObject, undefined, 4);
   }
 
@@ -32,7 +30,7 @@ export class Interpreter {
    * @param s
    * @returns to json object
    */
-  interpretToJsonObject(s: string): object {
+  interpretToJsonObject(s: string): object | null {
     const modl = this.interpret(s);
     return modlToJson(modl);
   }

@@ -55,21 +55,12 @@ class ThrowingErrorListener extends ErrorListener {
    * @param column
    * @param msg
    */
-  syntaxError(
-    recognizer: Recognizer,
-    offendingSymbol,
-    line: number,
-    column: number,
-    msg: string
-  ) {
+  syntaxError(recognizer: Recognizer, offendingSymbol, line: number, column: number, msg: string) {
     if (recognizer) {
       const message = `line ${line}:${column} ${msg} ${offendingSymbol}`;
       throw new ParseCancellationException(message, 'Syntax Error');
     } else {
-      throw new ParseCancellationException(
-        "'recognizer' parameter not present",
-        'Bad Parameter'
-      );
+      throw new ParseCancellationException("'recognizer' parameter not present", 'Bad Parameter');
     }
   }
 }

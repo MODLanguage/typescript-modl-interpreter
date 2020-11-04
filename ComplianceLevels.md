@@ -1,6 +1,7 @@
 # MODL Features
 
 ## Level 0
+### Data Types
 - map
 - pair
 - array
@@ -9,9 +10,11 @@
 - string - plain, quoted, graved
 - boolean
 - null
+### Functionality
 - key validation
 - Comments
 - Basic Type inference
+- Hidden keys
 ## Level 1
 ## Level 2
 ## Level 3
@@ -23,7 +26,6 @@
 ## Unassigned
 - Conditionals
 - Immutable keys
-- Hidden keys
 - Instructions
 - Object referencing
 - Deep object referencing

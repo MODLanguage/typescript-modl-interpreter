@@ -29,29 +29,16 @@ export class ModlNbArray {
  * Modl pair
  */
 export class ModlPair {
-  constructor(
-    readonly key: string | ModlQuoted,
-    readonly value: ModlValueItem | ModlMap | ModlArray
-  ) {}
+  constructor(readonly key: string | ModlQuoted, readonly value: ModlValueItem | ModlMap | ModlArray) {}
 }
 
-export type ModlValueItem =
-  | ModlMap
-  | ModlPair
-  | ModlArray
-  | ModlNbArray
-  | ModlPrimitive;
+export type ModlValueItem = ModlMap | ModlPair | ModlArray | ModlNbArray | ModlPrimitive;
 
 export type ModlMapItem = ModlPair;
 
 export type ModlArrayItem = ModlArrayValueItem;
 
-export type ModlValue =
-  | ModlMap
-  | ModlPair
-  | ModlArray
-  | ModlNbArray
-  | ModlPrimitive;
+export type ModlValue = ModlMap | ModlPair | ModlArray | ModlNbArray | ModlPrimitive;
 
 export type ModlArrayValueItem = ModlMap | ModlPair | ModlArray | ModlPrimitive;
 

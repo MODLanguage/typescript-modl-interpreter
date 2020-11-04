@@ -10,13 +10,9 @@ type GrammarTest = {
   compliance_level: number;
 };
 
-const tests = JSON.parse(
-  readFileSync('../grammar/tests/level_0_tests.json', {}).toString()
-) as GrammarTest[];
+const tests = JSON.parse(readFileSync('../grammar/tests/level_0_tests.json', {}).toString()) as GrammarTest[];
 
-const errors = JSON.parse(
-  readFileSync('../grammar/tests/level_0_errors.json', {}).toString()
-) as GrammarTest[];
+const errors = JSON.parse(readFileSync('../grammar/tests/level_0_errors.json', {}).toString()) as GrammarTest[];
 
 describe('Grammar - compliance level 0', () => {
   it('should be able to read the level_0_tests.json file', () => {
@@ -43,9 +39,7 @@ describe('Grammar - compliance level 0', () => {
       errors.forEach((test) => {
         const interpreter = new Interpreter();
 
-        expect(
-          interpreter.interpretToJsonString.bind(interpreter, test.input)
-        ).to.throw(test.expected_output);
+        expect(interpreter.interpretToJsonString.bind(interpreter, test.input)).to.throw(test.expected_output);
       });
     } else {
       fail('There are no compliance level 0 error tests');

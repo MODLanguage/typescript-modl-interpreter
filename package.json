@@ -27,6 +27,7 @@
   "scripts": {
     "test": "mocha --require ts-node/register 'test/**/*.ts'",
     "debug": "mocha --require ts-node/register 'test/**/*.ts'",
+    "debug-trace": "mocha --trace-warnings --require ts-node/register 'test/**/*.ts'",
     "version": "git add -A .",
     "pretest": "npm run format && npm run lint && npm run build",
     "preversion": "npm run format && npm run lint && npm run doc && npm run build",
@@ -35,7 +36,8 @@
     "format": "prettier --write \"**/*.ts\"",
     "lint": "tslint --fix -p tsconfig.json",
     "prepublish": "npm test",
-    "publish": "git push && git push --tags"  },
+    "publish": "git push && git push --tags"
+  },
   "author": "NUM Technology Ltd",
   "license": "ISC",
   "files": [

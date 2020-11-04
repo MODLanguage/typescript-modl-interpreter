@@ -1,8 +1,4 @@
-import {
-  ModlPair,
-  ModlQuoted,
-  ModlString,
-} from '../lib/modl-interpreter/Model';
+import { ModlPair, ModlQuoted, ModlString } from '../lib/modl-interpreter/Model';
 
 import { expect } from 'chai';
 
