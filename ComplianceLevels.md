@@ -16,6 +16,10 @@
 - Basic Type inference
 - Hidden keys
 ## Level 1
+### Data Types
+- 
+### Functionality
+- 
 ## Level 2
 ## Level 3
 ## Level 4

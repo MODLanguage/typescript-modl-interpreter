@@ -1,0 +1,12 @@
+[
+  {
+    "id": "0",
+    "input": "_123=b",
+    "expected_output": "Interpreter Error: Invalid key - \"123\" - entirely numeric keys are not allowed: _123"
+  },
+  {
+    "id": "1",
+    "input": "%a=1",
+    "expected_output": "Interpreter Error: Invalid key - spaces and % characters are not allowed: %a"
+  }
+]

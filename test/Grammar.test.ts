@@ -10,9 +10,9 @@ type GrammarTest = {
   compliance_level: number;
 };
 
-const tests = JSON.parse(readFileSync('../grammar/tests/level_0_tests.json', {}).toString()) as GrammarTest[];
+const tests = JSON.parse(readFileSync('./test/level_0_tests.json', {}).toString()) as GrammarTest[];
 
-const errors = JSON.parse(readFileSync('../grammar/tests/level_0_errors.json', {}).toString()) as GrammarTest[];
+const errors = JSON.parse(readFileSync('./test/level_0_errors.json', {}).toString()) as GrammarTest[];
 
 describe('Grammar - compliance level 0', () => {
   it('should be able to read the level_0_tests.json file', () => {

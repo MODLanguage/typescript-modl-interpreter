@@ -37,7 +37,7 @@
     "doc": "typedoc",
     "format": "prettier --write \"**/*.ts\"",
     "lint": "tslint --fix -p tsconfig.json",
-    "prepublish": "npm test",
+    "prepare": "npm test",
     "publish": "git push && git push --tags --force"
   },
   "author": "NUM Technology Ltd",

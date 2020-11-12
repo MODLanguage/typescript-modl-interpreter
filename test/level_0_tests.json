@@ -1,0 +1,152 @@
+[
+  {
+    "id": "0",
+    "input": "_a=b",
+    "expected_output": "null"
+  },
+  {
+    "id": "1",
+    "input": "a=b",
+    "expected_output": "{\"a\":\"b\"}"
+  },
+  {
+    "id": "2",
+    "input": "a=b;c=d",
+    "expected_output": "{\"a\":\"b\",\"c\":\"d\"}"
+  },
+  {
+    "id": "3",
+    "input": "[a=b;c=(d=[f=g])]",
+    "expected_output": "[{\"a\":\"b\"},{\"c\":{\"d\":[{\"f\":\"g\"}]}}]"
+  },
+  {
+    "id": "4",
+    "input": "`a`=b",
+    "expected_output": "{\"a\":\"b\"}"
+  },
+  {
+    "id": "5",
+    "input": "(make=Bentley;model=Continental GT)",
+    "expected_output": "{\"make\":\"Bentley\",\"model\":\"Continental GT\"}"
+  },
+  {
+    "id": "6",
+    "input": "[fastback;convertible]",
+    "expected_output": "[\"fastback\",\"convertible\"]"
+  },
+  {
+    "id": "7",
+    "input": "car(make=Bentley;model=Continental GT)",
+    "expected_output": "{\"car\":{\"make\":\"Bentley\",\"model\":\"Continental GT\"}}"
+  },
+  {
+    "id": "8",
+    "input": "car=(make=Bentley;model=Continental GT)",
+    "expected_output": "{\"car\":{\"make\":\"Bentley\",\"model\":\"Continental GT\"}}"
+  },
+  {
+    "id": "9",
+    "input": "style[fastback;convertible]",
+    "expected_output": "{\"style\":[\"fastback\",\"convertible\"]}"
+  },
+  {
+    "id": "10",
+    "input": "style=[fastback;convertible]",
+    "expected_output": "{\"style\":[\"fastback\",\"convertible\"]}"
+  },
+  {
+    "id": "11",
+    "input": "(conventional_true = true;unconventional_true=01)",
+    "expected_output": "{\"conventional_true\":true,\"unconventional_true\":true}"
+  },
+  {
+    "id": "12",
+    "input": "(conventional_false = false;unconventional_false=00)",
+    "expected_output": "{\"conventional_false\":false,\"unconventional_false\":false}"
+  },
+  {
+    "id": "13",
+    "input": "(conventional_null = null;unconventional_null=000)",
+    "expected_output": "{\"conventional_null\":null,\"unconventional_null\":null}"
+  },
+  {
+    "id": "14",
+    "input": "a=\"b\"",
+    "expected_output": "{\"a\":\"b\"}"
+  },
+  {
+    "id": "15",
+    "input": "a=`b`",
+    "expected_output": "{\"a\":\"b\"}"
+  },
+  {
+    "id": "16",
+    "input": "a=`Bring \"me\" sunshine.`",
+    "expected_output": "{\"a\":\"Bring \\\"me\\\" sunshine.\"}"
+  },
+  {
+    "id": "17",
+    "input": "a=\"Bring `me` sunshine.\"",
+    "expected_output": "{\"a\":\"Bring `me` sunshine.\"}"
+  },
+  {
+    "id": "18",
+    "input": "a=12",
+    "expected_output": "{\"a\":12}"
+  },
+  {
+    "id": "19",
+    "input": "a=3.14",
+    "expected_output": "{\"a\":3.14}"
+  },
+  {
+    "id": "20",
+    "input": "1_x=3.14",
+    "expected_output": "{\"1_x\":3.14}"
+  },
+  {
+    "id": "21",
+    "input": "@a=b",
+    "expected_output": "{\"@a\":\"b\"}"
+  },
+  {
+    "id": "22",
+    "input": "a=b;\n## should ignore this comment\nc=d",
+    "expected_output": "{\"a\":\"b\",\"c\":\"d\"}"
+  },
+  {
+    "id": "23",
+    "input": "a=\"123\"",
+    "expected_output": "{\"a\":\"123\"}"
+  },
+  {
+    "id": "24",
+    "input": "a=\"null\"",
+    "expected_output": "{\"a\":\"null\"}"
+  },
+  {
+    "id": "25",
+    "input": "a=\"false\"",
+    "expected_output": "{\"a\":\"false\"}"
+  },
+  {
+    "id": "26",
+    "input": "a=\"true\"",
+    "expected_output": "{\"a\":\"true\"}"
+  },
+  {
+    "id": "27",
+    "input": "a=\"00\"",
+    "expected_output": "{\"a\":\"00\"}"
+  },
+  {
+    "id": "28",
+    "input": "a=\"01\"",
+    "expected_output": "{\"a\":\"01\"}"
+  },
+  {
+    "id": "29",
+    "input": "a=\"000\"",
+    "expected_output": "{\"a\":\"000\"}"
+  }
+]
