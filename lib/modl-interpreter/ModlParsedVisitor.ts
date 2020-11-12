@@ -31,7 +31,7 @@ export function visitModl(ctx: any): Modl {
  * @param ctx
  * @returns true if terminal
  */
-function nonTerminal(ctx): boolean {
+function nonTerminal(ctx: any): boolean {
   return ctx.__proto__.constructor.name !== 'TerminalNodeImpl';
 }
 
@@ -40,7 +40,7 @@ function nonTerminal(ctx): boolean {
  * @param ctx
  * @returns modl structure
  */
-function visitModl_structure(ctx): ModlStructure {
+function visitModl_structure(ctx: any): ModlStructure {
   const ctxClassName = ctx.__proto__.constructor.name;
 
   switch (ctxClassName) {
@@ -65,7 +65,7 @@ function visitModl_structure(ctx): ModlStructure {
  * @param ctx
  * @returns modl map
  */
-function visitModl_map(ctx): ModlMap {
+function visitModl_map(ctx: any): ModlMap {
   const children = ctx.children.filter(nonTerminal).map(visitChild);
 
   return new ModlMap(children);
@@ -76,7 +76,7 @@ function visitModl_map(ctx): ModlMap {
  * @param ctx
  * @returns modl array
  */
-function visitModl_array(ctx): ModlArray {
+function visitModl_array(ctx: any): ModlArray {
   const children = ctx.children.filter(nonTerminal).map(visitChild);
   return new ModlArray(children);
 }
@@ -86,7 +86,7 @@ function visitModl_array(ctx): ModlArray {
  * @param ctx
  * @returns modl nb array
  */
-function visitModl_nb_array(ctx): ModlNbArray {
+function visitModl_nb_array(ctx: any): ModlNbArray {
   const children = ctx.children.filter(nonTerminal).map(visitChild);
   return new ModlNbArray(children);
 }
@@ -96,7 +96,7 @@ function visitModl_nb_array(ctx): ModlNbArray {
  * @param ctx
  * @returns modl pair
  */
-function visitModl_pair(ctx): ModlPair {
+function visitModl_pair(ctx: any): ModlPair {
   const key = ctx.children[0].getText();
 
   validateKey(key);
@@ -113,7 +113,7 @@ function visitModl_pair(ctx): ModlPair {
  * @param ctx
  * @returns modl value item
  */
-function visitModl_value_item(ctx): ModlValueItem {
+function visitModl_value_item(ctx: any): ModlValueItem {
   return visitChild(ctx.children[0]);
 }
 
@@ -122,7 +122,7 @@ function visitModl_value_item(ctx): ModlValueItem {
  * @param ctx
  * @returns modl value
  */
-function visitModl_value(ctx): ModlValue {
+function visitModl_value(ctx: any): ModlValue {
   return visitChild(ctx.children[0]);
 }
 
@@ -131,7 +131,7 @@ function visitModl_value(ctx): ModlValue {
  * @param ctx
  * @returns modl array value item
  */
-function visitModl_array_value_item(ctx): ModlArrayValueItem {
+function visitModl_array_value_item(ctx: any): ModlArrayValueItem {
   return visitChild(ctx.children[0]) as ModlArrayValueItem;
 }
 
@@ -140,7 +140,7 @@ function visitModl_array_value_item(ctx): ModlArrayValueItem {
  * @param ctx
  * @returns modl primitive
  */
-function visitModl_primitive(ctx): ModlPrimitive {
+function visitModl_primitive(ctx: any): ModlPrimitive {
   const text = ctx.getText();
   if (!text || text === 'null' || text === '000') {
     return ModlBoolNull.ModlNull;
@@ -167,7 +167,7 @@ function visitModl_primitive(ctx): ModlPrimitive {
  * @param child
  * @returns
  */
-function visitChild(child) {
+function visitChild(child: any) {
   const childClassName = child.__proto__.constructor.name;
 
   switch (childClassName) {

@@ -34,7 +34,7 @@ export function modlToJson(modl: Modl): object | null {
       }
     });
 
-    return (Object.keys(result).length === 0) ? null : result;
+    return Object.keys(result).length === 0 ? null : result;
   }
 }
 
@@ -83,7 +83,7 @@ function toJson(x: ModlValueItem): any {
  * @param result
  * @returns
  */
-function pairToJson(p: ModlPair, result: object) {
+function pairToJson(p: ModlPair, result: any) {
   const key = p.key instanceof ModlQuoted ? unquote(p.key.value) : unquote(p.key);
   if (!key.startsWith('_')) {
     result[key] = toJson(p.value);
@@ -140,5 +140,7 @@ function arrayToJson(a: ModlArray | ModlNbArray): object {
 }
 
 function unquote(s: string): string {
-  return ((s.startsWith('`') && s.endsWith('`')) || (s.startsWith('"') && s.endsWith('"'))) ? s.substring(1, s.length - 1) : s;
+  return (s.startsWith('`') && s.endsWith('`')) || (s.startsWith('"') && s.endsWith('"'))
+    ? s.substring(1, s.length - 1)
+    : s;
 }

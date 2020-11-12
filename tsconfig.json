@@ -2,12 +2,12 @@
   "extends": "@tsconfig/node10/tsconfig.json",
   "compilerOptions": {
     "module": "commonjs",
-    "target": "es6",
+    "target": "es5",
+    "lib": [ "es2015", "dom" ],
     "declaration": true,
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     "removeComments": true,
     "moduleResolution": "node",
-    //"inlineSourceMap": true,
     "outDir": "./dist",
     "strictFunctionTypes": true, /* Enable strict checking of function types. */
     "strictPropertyInitialization": true, /* Enable strict checking of property initialization in classes. */
@@ -20,9 +20,13 @@
     "strict": true,
     "sourceMap": true
   },
-  "include": ["lib"],
+  "include": [
+    "lib",
+    "index.d.ts"
+  ],
   "exclude": [
     "node_modules",
-    "test"
+    "test",
+    "test-integration"
   ]
 }
