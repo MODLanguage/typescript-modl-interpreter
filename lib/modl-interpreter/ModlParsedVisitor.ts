@@ -12,7 +12,7 @@ import {
   ModlString,
   ModlStructure,
   ModlValue,
-  ModlValueItem,
+  ModlValueItem
 } from './Model';
 
 /**
@@ -27,7 +27,7 @@ export function visitModl(ctx: any): Modl {
 }
 
 /**
- * Nons terminal
+ * Non terminal
  * @param ctx
  * @returns true if terminal
  */
