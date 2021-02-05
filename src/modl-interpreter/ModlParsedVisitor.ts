@@ -12,7 +12,7 @@ import {
   ModlString,
   ModlStructure,
   ModlValue,
-  ModlValueItem
+  ModlValueItem,
 } from './Model';
 
 /**

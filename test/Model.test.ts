@@ -1,6 +1,5 @@
-import { ModlPair, ModlQuoted, ModlString } from '../lib/modl-interpreter/Model';
-
 import { expect } from 'chai';
+import { ModlPair, ModlQuoted, ModlString } from '../src/modl-interpreter/Model';
 
 describe('Model', () => {
   it('should be able to create a simple ModlPair', () => {

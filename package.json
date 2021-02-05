@@ -48,7 +48,7 @@
   },
   "files": [
     "dist/**/*",
-    "lib/**/*",
+    "src/**/*",
     "index.d.ts",
     "index.js",
     "gen/**/*"

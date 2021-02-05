@@ -1,7 +1,7 @@
 import { fail } from 'assert';
 import { expect } from 'chai';
 import { readFileSync } from 'fs';
-import { Interpreter } from '../lib/modl-interpreter/Interpreter';
+import { Interpreter } from '../src/modl-interpreter/Interpreter';
 
 type GrammarTest = {
   id: string;

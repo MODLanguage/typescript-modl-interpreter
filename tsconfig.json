@@ -3,7 +3,10 @@
   "compilerOptions": {
     "module": "commonjs",
     "target": "es5",
-    "lib": [ "es2015", "dom" ],
+    "lib": [
+      "es2015",
+      "dom"
+    ],
     "declaration": true,
     "noImplicitAny": true,
     "removeComments": true,
@@ -21,7 +24,7 @@
     "sourceMap": true
   },
   "include": [
-    "lib",
+    "src",
     "index.d.ts"
   ],
   "exclude": [

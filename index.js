@@ -1,1 +1,1 @@
-module.exports = require('./lib/modl-interpreter/Interpreter.js');
+module.exports = require('./src/modl-interpreter/Interpreter.js');
