@@ -1,14 +1,13 @@
 import {
   Modl,
   ModlArray,
+  ModlBoolNull,
   ModlMap,
+  ModlNumber,
   ModlPair,
   ModlQuoted,
   ModlString,
-  ModlValueItem,
-  ModlNbArray,
-  ModlNumber,
-  ModlBoolNull,
+  ModlValue,
 } from './Model';
 
 /**
@@ -43,7 +42,7 @@ export function modlToJson(modl: Modl): object | null {
  * @param x
  * @returns json
  */
-function toJson(x: ModlValueItem): any {
+function toJson(x: ModlValue): any {
   if (x instanceof ModlArray) {
     return arrayToJson(x);
   }
@@ -52,9 +51,6 @@ function toJson(x: ModlValueItem): any {
   }
   if (x instanceof ModlPair) {
     return pairToJson(x, {});
-  }
-  if (x instanceof ModlNbArray) {
-    return arrayToJson(x);
   }
   if (x instanceof ModlQuoted) {
     return unquote(x.value);
@@ -109,7 +105,7 @@ function mapToJson(m: ModlMap, result: object): object {
  * @param a
  * @returns to json
  */
-function arrayToJson(a: ModlArray | ModlNbArray): object {
+function arrayToJson(a: ModlArray): object {
   const result = new Array();
   a.items.forEach((x) => {
     if (x instanceof ModlArray) {
@@ -118,8 +114,6 @@ function arrayToJson(a: ModlArray | ModlNbArray): object {
       result.push(mapToJson(x, {}));
     } else if (x instanceof ModlPair) {
       result.push(pairToJson(x, {}));
-    } else if (x instanceof ModlNbArray) {
-      result.push(arrayToJson(x));
     } else if (x instanceof ModlQuoted) {
       result.push(unquote(x.value));
     } else if (x instanceof ModlNumber) {

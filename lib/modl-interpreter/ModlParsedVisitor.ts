@@ -1,18 +1,15 @@
 import {
   Modl,
   ModlArray,
-  ModlArrayValueItem,
   ModlBoolNull,
   ModlMap,
   ModlMapItem,
-  ModlNbArray,
   ModlNumber,
   ModlPair,
   ModlPrimitive,
   ModlString,
   ModlStructure,
   ModlValue,
-  ModlValueItem,
 } from './Model';
 
 /**
@@ -82,16 +79,6 @@ function visitModl_array(ctx: any): ModlArray {
 }
 
 /**
- * Visits modl nb array
- * @param ctx
- * @returns modl nb array
- */
-function visitModl_nb_array(ctx: any): ModlNbArray {
-  const children = ctx.children.filter(nonTerminal).map(visitChild);
-  return new ModlNbArray(children);
-}
-
-/**
  * Visits modl pair
  * @param ctx
  * @returns modl pair
@@ -103,18 +90,9 @@ function visitModl_pair(ctx: any): ModlPair {
 
   const value = ctx.children[1].__proto__.constructor.name === 'TerminalNodeImpl' ? ctx.children[2] : ctx.children[1];
 
-  const pairValue: ModlValueItem | ModlMap | ModlArray = visitChild(value);
+  const pairValue: ModlValue = visitChild(value);
 
   return new ModlPair(key, pairValue);
-}
-
-/**
- * Visits modl value item
- * @param ctx
- * @returns modl value item
- */
-function visitModl_value_item(ctx: any): ModlValueItem {
-  return visitChild(ctx.children[0]);
 }
 
 /**
@@ -124,15 +102,6 @@ function visitModl_value_item(ctx: any): ModlValueItem {
  */
 function visitModl_value(ctx: any): ModlValue {
   return visitChild(ctx.children[0]);
-}
-
-/**
- * Visits modl array value item
- * @param ctx
- * @returns modl array value item
- */
-function visitModl_array_value_item(ctx: any): ModlArrayValueItem {
-  return visitChild(ctx.children[0]) as ModlArrayValueItem;
 }
 
 /**
@@ -177,16 +146,10 @@ function visitChild(child: any) {
       return visitModl_map(child);
     case 'Modl_arrayContext':
       return visitModl_array(child);
-    case 'Modl_nb_arrayContext':
-      return visitModl_nb_array(child);
     case 'Modl_pairContext':
       return visitModl_pair(child);
-    case 'Modl_value_itemContext':
-      return visitModl_value_item(child);
     case 'Modl_valueContext':
       return visitModl_value(child);
-    case 'Modl_array_value_itemContext':
-      return visitModl_array_value_item(child);
     case 'Modl_primitiveContext':
       return visitModl_primitive(child);
     default:

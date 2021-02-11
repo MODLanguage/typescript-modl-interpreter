@@ -15,32 +15,19 @@ export class ModlMap {
  * Modl array
  */
 export class ModlArray {
-  constructor(readonly items: [ModlArrayItem | ModlNbArray]) {}
-}
-
-/**
- * Modl nb array
- */
-export class ModlNbArray {
-  constructor(readonly items: ModlArrayItem[]) {}
+  constructor(readonly items: [ModlValue]) {}
 }
 
 /**
  * Modl pair
  */
 export class ModlPair {
-  constructor(readonly key: string | ModlQuoted, readonly value: ModlValueItem | ModlMap | ModlArray) {}
+  constructor(readonly key: string | ModlQuoted, readonly value: ModlValue | ModlMap | ModlArray) {}
 }
-
-export type ModlValueItem = ModlMap | ModlPair | ModlArray | ModlNbArray | ModlPrimitive;
 
 export type ModlMapItem = ModlPair;
 
-export type ModlArrayItem = ModlArrayValueItem;
-
-export type ModlValue = ModlMap | ModlPair | ModlArray | ModlNbArray | ModlPrimitive;
-
-export type ModlArrayValueItem = ModlMap | ModlPair | ModlArray | ModlPrimitive;
+export type ModlValue = ModlMap | ModlPair | ModlArray | ModlPrimitive;
 
 export type ModlPrimitive = ModlQuoted | ModlNumber | ModlString | ModlBoolNull;
 
