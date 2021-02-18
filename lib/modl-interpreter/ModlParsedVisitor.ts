@@ -163,12 +163,7 @@ function visitChild(child: any) {
  * @param k
  */
 function validateKey(k: string) {
-  const key = k && k.startsWith('_') ? k.substr(1) : k;
-  if (Number.parseInt(key, 10).toString() === key || Number.parseFloat(key).toString() === key) {
-    throw new Error(`Interpreter Error: Invalid key - "${key}" - entirely numeric keys are not allowed: ${k}`);
-  }
-
-  if (key.includes('%')) {
+  if (k.includes('%')) {
     throw new Error(`Interpreter Error: Invalid key - spaces and % characters are not allowed: ${k}`);
   }
 }

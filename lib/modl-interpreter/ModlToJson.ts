@@ -81,9 +81,7 @@ function toJson(x: ModlValue): any {
  */
 function pairToJson(p: ModlPair, result: any) {
   const key = p.key instanceof ModlQuoted ? unquote(p.key.value) : unquote(p.key);
-  if (!key.startsWith('_')) {
-    result[key] = toJson(p.value);
-  }
+  result[key] = toJson(p.value);
   return result;
 }
 

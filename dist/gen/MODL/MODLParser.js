@@ -8,7 +8,7 @@ var grammarFileName = "MODLParser.g4";
 
 
 var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
-    "\u0003\u0011X\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004\u0004\t",
+    "\u0003\u0010X\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004\u0004\t",
     "\u0004\u0004\u0005\t\u0005\u0004\u0006\t\u0006\u0004\u0007\t\u0007\u0004",
     "\b\t\b\u0003\u0002\u0003\u0002\u0003\u0002\u0007\u0002\u0014\n\u0002",
     "\f\u0002\u000e\u0002\u0017\u000b\u0002\u0003\u0002\u0005\u0002\u001a",
@@ -22,7 +22,7 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "\u0005\u0003\u0006\u0003\u0006\u0003\u0006\u0003\u0006\u0003\u0006\u0003",
     "\u0006\u0003\u0006\u0005\u0006N\n\u0006\u0003\u0007\u0003\u0007\u0003",
     "\u0007\u0003\u0007\u0005\u0007T\n\u0007\u0003\b\u0003\b\u0003\b\u0002",
-    "\u0002\t\u0002\u0004\u0006\b\n\f\u000e\u0002\u0004\u0003\u0002\u000f",
+    "\u0002\t\u0002\u0004\u0006\b\n\f\u000e\u0002\u0004\u0003\u0002\u000e",
     "\u0010\u0004\u0002\u0004\u0006\u000e\u0010\u0002_\u0002\u0010\u0003",
     "\u0002\u0002\u0002\u0004 \u0003\u0002\u0002\u0002\u0006\"\u0003\u0002",
     "\u0002\u0002\b/\u0003\u0002\u0002\u0002\nM\u0003\u0002\u0002\u0002\f",
@@ -70,11 +70,11 @@ var decisionsToDFA = atn.decisionToState.map( function(ds, index) { return new a
 var sharedContextCache = new antlr4.PredictionContextCache();
 
 var literalNames = [ null, null, "'null'", "'true'", "'false'", "'='", "';'", 
-                     "','", "'{'", "'}'", "'['", "']'" ];
+                     "','", "'('", "')'", "'['", "']'" ];
 
 var symbolicNames = [ null, "WS", "NULL", "TRUE", "FALSE", "EQUALS", "STRUCT_SEP", 
                       "ARR_SEP", "LBRAC", "RBRAC", "LSBRAC", "RSBRAC", "NUMBER", 
-                      "QUOTED", "STRING", "HASH_PREFIX" ];
+                      "QUOTED", "STRING" ];
 
 var ruleNames =  [ "modl", "modl_structure", "modl_map", "modl_array", "modl_pair", 
                    "modl_value", "modl_primitive" ];
@@ -112,7 +112,6 @@ MODLParser.RSBRAC = 11;
 MODLParser.NUMBER = 12;
 MODLParser.QUOTED = 13;
 MODLParser.STRING = 14;
-MODLParser.HASH_PREFIX = 15;
 
 MODLParser.RULE_modl = 0;
 MODLParser.RULE_modl_structure = 1;
@@ -311,6 +310,7 @@ MODLParser.prototype.modl_structure = function() {
             this.state = 28;
             this.modl_array();
             break;
+        case MODLParser.NUMBER:
         case MODLParser.QUOTED:
         case MODLParser.STRING:
             this.enterOuterAlt(localctx, 3);
@@ -419,7 +419,7 @@ MODLParser.prototype.modl_map = function() {
         this.state = 41;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
-        if(_la===MODLParser.QUOTED || _la===MODLParser.STRING) {
+        if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << MODLParser.NUMBER) | (1 << MODLParser.QUOTED) | (1 << MODLParser.STRING))) !== 0)) {
             this.state = 33;
             this.modl_pair();
             this.state = 38;
@@ -625,6 +625,10 @@ Modl_pairContext.prototype.QUOTED = function() {
     return this.getToken(MODLParser.QUOTED, 0);
 };
 
+Modl_pairContext.prototype.NUMBER = function() {
+    return this.getToken(MODLParser.NUMBER, 0);
+};
+
 Modl_pairContext.prototype.modl_map = function() {
     return this.getTypedRuleContext(Modl_mapContext,0);
 };
@@ -672,7 +676,7 @@ MODLParser.prototype.modl_pair = function() {
             this.enterOuterAlt(localctx, 1);
             this.state = 68;
             _la = this._input.LA(1);
-            if(!(_la===MODLParser.QUOTED || _la===MODLParser.STRING)) {
+            if(!((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << MODLParser.NUMBER) | (1 << MODLParser.QUOTED) | (1 << MODLParser.STRING))) !== 0))) {
             this._errHandler.recoverInline(this);
             }
             else {
