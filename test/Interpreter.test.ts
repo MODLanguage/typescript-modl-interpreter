@@ -20,7 +20,7 @@ describe('TypeScript Interpreter', () => {
   });
 
   it('should be able to parse a simple MODL map to a Modl object', () => {
-    const jsonObject = new Interpreter().interpretToJsonObject('a{b=c}');
+    const jsonObject = new Interpreter().interpretToJsonObject('a(b=c)');
     expect(JSON.stringify(jsonObject)).to.eq('{"a":{"b":"c"}}');
   });
 

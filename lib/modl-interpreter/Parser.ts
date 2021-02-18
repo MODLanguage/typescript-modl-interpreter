@@ -1,7 +1,7 @@
 import { CommonTokenStream, InputStream, Lexer, Recognizer } from 'antlr4';
 import { ErrorListener } from 'antlr4/error/ErrorListener';
-import { MODLLexer } from '../gen/MODL/MODLLexer';
-import { MODLParser } from '../gen/MODL/MODLParser';
+import { MODLLexer } from '../../dist/gen/MODL/MODLLexer';
+import { MODLParser } from '../../dist/gen/MODL/MODLParser';
 import { Modl } from './Model';
 import { visitModl } from './ModlParsedVisitor';
 

@@ -8,7 +8,7 @@ var grammarFileName = "MODLParser.g4";
 
 
 var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
-    "\u0003\u0010X\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004\u0004\t",
+    "\u0003\u0011X\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004\u0004\t",
     "\u0004\u0004\u0005\t\u0005\u0004\u0006\t\u0006\u0004\u0007\t\u0007\u0004",
     "\b\t\b\u0003\u0002\u0003\u0002\u0003\u0002\u0007\u0002\u0014\n\u0002",
     "\f\u0002\u000e\u0002\u0017\u000b\u0002\u0003\u0002\u0005\u0002\u001a",
@@ -70,11 +70,11 @@ var decisionsToDFA = atn.decisionToState.map( function(ds, index) { return new a
 var sharedContextCache = new antlr4.PredictionContextCache();
 
 var literalNames = [ null, null, "'null'", "'true'", "'false'", "'='", "';'", 
-                     "','", "'('", "')'", "'['", "']'" ];
+                     "','", "'{'", "'}'", "'['", "']'" ];
 
 var symbolicNames = [ null, "WS", "NULL", "TRUE", "FALSE", "EQUALS", "STRUCT_SEP", 
                       "ARR_SEP", "LBRAC", "RBRAC", "LSBRAC", "RSBRAC", "NUMBER", 
-                      "QUOTED", "STRING" ];
+                      "QUOTED", "STRING", "HASH_PREFIX" ];
 
 var ruleNames =  [ "modl", "modl_structure", "modl_map", "modl_array", "modl_pair", 
                    "modl_value", "modl_primitive" ];
@@ -112,6 +112,7 @@ MODLParser.RSBRAC = 11;
 MODLParser.NUMBER = 12;
 MODLParser.QUOTED = 13;
 MODLParser.STRING = 14;
+MODLParser.HASH_PREFIX = 15;
 
 MODLParser.RULE_modl = 0;
 MODLParser.RULE_modl_structure = 1;

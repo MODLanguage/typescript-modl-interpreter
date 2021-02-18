@@ -3,6 +3,8 @@ import { expect } from 'chai';
 import { readFileSync } from 'fs';
 import { Interpreter } from '../lib/modl-interpreter/Interpreter';
 
+const deepEql = require('deep-eql');
+
 type GrammarTest = {
   id: string;
   input: string;
@@ -10,39 +12,70 @@ type GrammarTest = {
   compliance_level: number;
 };
 
-const tests = JSON.parse(readFileSync('../grammar/tests/level_0_tests.json', {}).toString()) as GrammarTest[];
+const tests = JSON.parse(readFileSync('../grammar/tests/base_tests.json', {}).toString()) as GrammarTest[];
 
-const errors = JSON.parse(readFileSync('../grammar/tests/level_0_error_tests.json', {}).toString()) as GrammarTest[];
+const extra = JSON.parse(readFileSync('../grammar/tests/extra_tests.json', {}).toString()) as GrammarTest[];
 
 describe('Grammar - compliance level 0', () => {
-  it('should be able to read the level_0_tests.json file', () => {
+  it('should be able to read the base_tests.json file', () => {
     expect(tests.length).to.be.greaterThan(0);
   });
 
-  it('should be able to read the level_0_errors.json file', () => {
-    expect(errors.length).to.be.greaterThan(0);
+  it('should be able to read the extra_tests.json file', () => {
+    expect(extra.length).to.be.greaterThan(0);
   });
 
   it('should be able to parse compliance level 0 MODL', () => {
     if (tests.length > 0) {
+      let overallResult = true;
+
       tests.forEach((test) => {
-        const result = new Interpreter().interpretToJsonString(test.input);
-        expect(result).to.equal(test.expected_output);
+        try {
+          const result = new Interpreter().interpretToJsonString(test.input);
+
+          const same = deepEql(test.expected_output, result) as boolean;
+
+          if (!same) {
+            console.log(`Error for test : ${test.id}`);
+            console.log('expected: ' + JSON.stringify(test.expected_output));
+            console.log('received: ' + JSON.stringify(result));
+          }
+          overallResult &&= same;
+        } catch (e) {
+          console.log(`Error for test : ${test.id} : ${e.message}`);
+          overallResult = false;
+        }
       });
+      expect(overallResult).to.be.true;
     } else {
       fail('There are no compliance level 0 tests');
     }
   });
 
-  it('should be able to detect compliance level 0 MODL errors', () => {
-    if (errors.length > 0) {
-      errors.forEach((test) => {
-        const interpreter = new Interpreter();
+  it('should be able to parse compliance level 0 MODL extra tests', () => {
+    if (extra.length > 0) {
+      let overallResult = true;
 
-        expect(interpreter.interpretToJsonString.bind(interpreter, test.input)).to.throw(test.expected_output);
+      extra.forEach((test) => {
+        try {
+          const result = new Interpreter().interpretToJsonString(test.input);
+
+          const same = deepEql(test.expected_output, result) as boolean;
+
+          if (!same) {
+            console.log(`Error for test : ${test.id}`);
+            console.log('expected: ' + JSON.stringify(test.expected_output));
+            console.log('received: ' + JSON.stringify(result));
+          }
+          overallResult &&= same;
+        } catch (e) {
+          console.log(`Error for test : ${test.id} : ${e.message}`);
+          overallResult = false;
+        }
       });
+      expect(overallResult).to.be.true;
     } else {
-      fail('There are no compliance level 0 error tests');
+      fail('There are no compliance level 0 extra tests');
     }
   });
 });
