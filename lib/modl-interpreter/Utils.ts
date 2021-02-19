@@ -69,9 +69,9 @@ const replacements: Map<string, string> = new Map([
   ['\\r', '\r'],
 ]);
 
-const BACKSLASH_U = "\\u";
+const BACKSLASH_U = '\\u';
 
-const TILDE_U = "~u";
+const TILDE_U = '~u';
 
 const TILDE = '~';
 
@@ -79,12 +79,11 @@ const BACKSLASH = '\\';
 
 const HEX = 16;
 
-
 const digits = '0123456789';
 
 /**
  * Convert explicit unicode escape sequences to unicode characters.
- * (recursive implementation)
+ * (non-recursive implementation)
  *
  * @param str a String possible containing escape sequences.
  * @return the string with escape sequences converted to unicode characters.
@@ -92,7 +91,7 @@ const digits = '0123456789';
 const convertUnicodeSequences = (str: string): string => {
   let start = 0;
   let result = str;
-  while (result != null) {
+  while (start < result.length) {
     // We could have a backslash-u escape sequence or a ~u escape sequence
     const backslashUIndex = result.indexOf(BACKSLASH_U, start);
     const tildeUIndex = result.indexOf(TILDE_U, start);
@@ -102,9 +101,9 @@ const convertUnicodeSequences = (str: string): string => {
     if (tildeUIndex < 0 && backslashUIndex < 0) {
       break;
     } else if (tildeUIndex < 0) {
-      unicodeStrIdx = backslashUIndex;// No ~? Must be backslash
+      unicodeStrIdx = backslashUIndex; // No ~? Must be backslash
     } else if (backslashUIndex < 0) {
-      unicodeStrIdx = tildeUIndex;// No backslash? Must be ~
+      unicodeStrIdx = tildeUIndex; // No backslash? Must be ~
     } else {
       // Pick the first escaped character and proceed with that one.
       unicodeStrIdx = Math.min(backslashUIndex, tildeUIndex);
@@ -119,17 +118,18 @@ const convertUnicodeSequences = (str: string): string => {
     if (!escapeSequenceIsEscaped(result, unicodeStrIdx)) {
       // Get the codepoint value and replace the escape sequence
       if (tryParseResult.codePoint > 0) {
-        const chars = String.fromCharCode(tryParseResult.codePoint);
+        const chars = String.fromCodePoint(tryParseResult.codePoint);
         result = replace(result, chars, unicodeStrIdx, tryParseResult.length + 2);
       }
     }
-
   }
   return result;
 };
 
 const escapeSequenceIsEscaped = (result: string, unicodeStrIdx: number): boolean => {
-  return unicodeStrIdx > 0 && (result.charAt(unicodeStrIdx - 1) == TILDE || result.charAt(unicodeStrIdx - 1) == BACKSLASH);
+  return (
+    unicodeStrIdx > 0 && (result.charAt(unicodeStrIdx - 1) === TILDE || result.charAt(unicodeStrIdx - 1) === BACKSLASH)
+  );
 };
 
 /**
@@ -155,7 +155,12 @@ const replace = (s: string, value: string, unicodeStrIdx: number, length: number
  * @return true if the value is a valid unicode codepoint
  */
 const isValidRange = (value: number): boolean => {
-  return (value >= 0x100000 && value <= 0x10ffff) || (value >= 0x10000 && value <= 0xfffff) || (value >= 0 && value <= 0xd7ff) || (value >= 0xe000 && value <= 0xffff);
+  return (
+    (value >= 0x100000 && value <= 0x10FFFF) ||
+    (value >= 0x10000 && value <= 0xFFFFF) ||
+    (value >= 0 && value <= 0xD7FF) ||
+    (value >= 0xE000 && value <= 0xFFFF)
+  );
 };
 
 /**
@@ -167,17 +172,16 @@ const isValidRange = (value: number): boolean => {
  * @return true if enough digits are available
  */
 const hasEnoughDigits = (s: string, idx: number, n: number): boolean => {
-  var i = 0;
-  while (i < n && (idx + i) < s.length) {
-    var c = s[idx + i];
-    if (!digits.includes(c) && "abcdefABCDEF".indexOf(c) <= -1) {
+  let i = 0;
+  while (i < n && idx + i < s.length) {
+    const c = s[idx + i];
+    if (!digits.includes(c) && 'abcdefABCDEF'.indexOf(c) <= -1) {
       return false;
     }
     i++;
   }
-  return i == n;
+  return i === n;
 };
-
 
 /**
  * Attempt to parse a unicode character starting at `idx` in `str`
@@ -187,7 +191,6 @@ const hasEnoughDigits = (s: string, idx: number, n: number): boolean => {
  * @return a TryParseResult with codepoint set to 0 on failure.
  */
 const tryParse = (str: string, idx: number): TryParseResult => {
-
   // Check for a 6-digit unicode value
   if (hasEnoughDigits(str, idx, 6)) {
     const value = getPossibleUnicodeValue(str, idx, 6);
@@ -224,7 +227,6 @@ const getPossibleUnicodeValue = (str: string, idx: number, i: number): number =>
  * Class to hold the result of the tryParse method
  */
 class TryParseResult {
-
   readonly codePoint: number;
 
   readonly length: number;
@@ -239,5 +241,4 @@ class TryParseResult {
     this.codePoint = codePoint;
     this.length = length;
   }
-
 }

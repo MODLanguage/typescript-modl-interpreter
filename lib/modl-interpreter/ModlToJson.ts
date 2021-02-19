@@ -7,7 +7,7 @@ import {
   ModlPair,
   ModlQuoted,
   ModlString,
-  ModlValue
+  ModlValue,
 } from './Model';
 import { createStringEscapeReplacer } from './Utils';
 
