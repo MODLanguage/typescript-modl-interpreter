@@ -7,8 +7,9 @@ import {
   ModlPair,
   ModlQuoted,
   ModlString,
-  ModlValue,
+  ModlValue
 } from './Model';
+import { createStringEscapeReplacer } from './Utils';
 
 /**
  * Modls to json
@@ -53,13 +54,13 @@ function toJson(x: ModlValue): any {
     return pairToJson(x, {});
   }
   if (x instanceof ModlQuoted) {
-    return unquote(x.value);
+    return stringEscapeReplacer.replace(unquote(x.value));
   }
   if (x instanceof ModlNumber) {
     return x.value;
   }
   if (x instanceof ModlString) {
-    return unquote(x.value);
+    return stringEscapeReplacer.replace(unquote(x.value));
   }
   if (x === ModlBoolNull.ModlFalse) {
     return false;
@@ -73,6 +74,8 @@ function toJson(x: ModlValue): any {
   return x;
 }
 
+const stringEscapeReplacer = createStringEscapeReplacer();
+
 /**
  * Pairs to json
  * @param p
@@ -80,7 +83,7 @@ function toJson(x: ModlValue): any {
  * @returns
  */
 function pairToJson(p: ModlPair, result: any) {
-  const key = p.key instanceof ModlQuoted ? unquote(p.key.value) : unquote(p.key);
+  const key = stringEscapeReplacer.replace(p.key instanceof ModlQuoted ? unquote(p.key.value) : unquote(p.key));
   result[key] = toJson(p.value);
   return result;
 }
@@ -113,11 +116,11 @@ function arrayToJson(a: ModlArray): object {
     } else if (x instanceof ModlPair) {
       result.push(pairToJson(x, {}));
     } else if (x instanceof ModlQuoted) {
-      result.push(unquote(x.value));
+      result.push(stringEscapeReplacer.replace(unquote(x.value)));
     } else if (x instanceof ModlNumber) {
       result.push(x.value);
     } else if (x instanceof ModlString) {
-      result.push(unquote(x.value));
+      result.push(stringEscapeReplacer.replace(unquote(x.value)));
     } else if (x === ModlBoolNull.ModlFalse) {
       result.push(false);
     } else if (x === ModlBoolNull.ModlTrue) {
