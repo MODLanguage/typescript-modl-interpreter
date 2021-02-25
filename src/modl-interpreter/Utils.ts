@@ -156,10 +156,10 @@ const replace = (s: string, value: string, unicodeStrIdx: number, length: number
  */
 const isValidRange = (value: number): boolean => {
   return (
-    (value >= 0x100000 && value <= 0x10FFFF) ||
-    (value >= 0x10000 && value <= 0xFFFFF) ||
-    (value >= 0 && value <= 0xD7FF) ||
-    (value >= 0xE000 && value <= 0xFFFF)
+    (value >= 0x100000 && value <= 0x10ffff) ||
+    (value >= 0x10000 && value <= 0xfffff) ||
+    (value >= 0 && value <= 0xd7ff) ||
+    (value >= 0xe000 && value <= 0xffff)
   );
 };
 
