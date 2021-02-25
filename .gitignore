@@ -1,7 +1,12 @@
 node_modules
 
 .idea
-dist
+dist/modl-interpreter
+dist/*.js
+dist/*.ts
+dist/*.map
+
 *.tar
 
 docs
+**/scratch*.ts

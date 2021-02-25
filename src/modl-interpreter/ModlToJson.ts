@@ -1,15 +1,15 @@
 import {
   Modl,
   ModlArray,
+  ModlBoolNull,
   ModlMap,
+  ModlNumber,
   ModlPair,
   ModlQuoted,
   ModlString,
-  ModlValueItem,
-  ModlNbArray,
-  ModlNumber,
-  ModlBoolNull,
+  ModlValue,
 } from './Model';
+import { createStringEscapeReplacer } from './Utils';
 
 /**
  * Modls to json
@@ -43,7 +43,7 @@ export function modlToJson(modl: Modl): object | null {
  * @param x
  * @returns json
  */
-function toJson(x: ModlValueItem): any {
+function toJson(x: ModlValue): any {
   if (x instanceof ModlArray) {
     return arrayToJson(x);
   }
@@ -53,17 +53,14 @@ function toJson(x: ModlValueItem): any {
   if (x instanceof ModlPair) {
     return pairToJson(x, {});
   }
-  if (x instanceof ModlNbArray) {
-    return arrayToJson(x);
-  }
   if (x instanceof ModlQuoted) {
-    return unquote(x.value);
+    return stringEscapeReplacer.replace(unquote(x.value));
   }
   if (x instanceof ModlNumber) {
     return x.value;
   }
   if (x instanceof ModlString) {
-    return unquote(x.value);
+    return stringEscapeReplacer.replace(unquote(x.value));
   }
   if (x === ModlBoolNull.ModlFalse) {
     return false;
@@ -77,6 +74,8 @@ function toJson(x: ModlValueItem): any {
   return x;
 }
 
+const stringEscapeReplacer = createStringEscapeReplacer();
+
 /**
  * Pairs to json
  * @param p
@@ -84,10 +83,8 @@ function toJson(x: ModlValueItem): any {
  * @returns
  */
 function pairToJson(p: ModlPair, result: any) {
-  const key = p.key instanceof ModlQuoted ? unquote(p.key.value) : unquote(p.key);
-  if (!key.startsWith('_')) {
-    result[key] = toJson(p.value);
-  }
+  const key = stringEscapeReplacer.replace(p.key instanceof ModlQuoted ? unquote(p.key.value) : unquote(p.key));
+  result[key] = toJson(p.value);
   return result;
 }
 
@@ -109,7 +106,7 @@ function mapToJson(m: ModlMap, result: object): object {
  * @param a
  * @returns to json
  */
-function arrayToJson(a: ModlArray | ModlNbArray): object {
+function arrayToJson(a: ModlArray): object {
   const result = new Array();
   a.items.forEach((x) => {
     if (x instanceof ModlArray) {
@@ -118,14 +115,12 @@ function arrayToJson(a: ModlArray | ModlNbArray): object {
       result.push(mapToJson(x, {}));
     } else if (x instanceof ModlPair) {
       result.push(pairToJson(x, {}));
-    } else if (x instanceof ModlNbArray) {
-      result.push(arrayToJson(x));
     } else if (x instanceof ModlQuoted) {
-      result.push(unquote(x.value));
+      result.push(stringEscapeReplacer.replace(unquote(x.value)));
     } else if (x instanceof ModlNumber) {
       result.push(x.value);
     } else if (x instanceof ModlString) {
-      result.push(unquote(x.value));
+      result.push(stringEscapeReplacer.replace(unquote(x.value)));
     } else if (x === ModlBoolNull.ModlFalse) {
       result.push(false);
     } else if (x === ModlBoolNull.ModlTrue) {
