@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { Interpreter } from '../src/modl-interpreter/Interpreter';
+import { Interpreter } from '../lib/modl-interpreter/Interpreter';
 
 describe('TypeScript Interpreter', () => {
   it('should be able to parse a simple MODL string to a JSON String', () => {

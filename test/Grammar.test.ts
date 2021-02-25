@@ -5,6 +5,8 @@ import { Interpreter } from '../src/modl-interpreter/Interpreter';
 
 const deepEql = require('deep-eql');
 
+const deepEql = require('deep-eql');
+
 type GrammarTest = {
   id: string;
   input: string;

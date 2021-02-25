@@ -26,8 +26,7 @@
   "include": [
     "lib",
     "dist/gen/MODL",
-    "index.d.ts",
-    "src/scratch.ts"
+    "index.d.ts"
   ],
   "exclude": [
     "node_modules",
