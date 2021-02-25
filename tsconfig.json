@@ -24,8 +24,10 @@
     "sourceMap": true
   },
   "include": [
-    "src",
-    "index.d.ts"
+    "lib",
+    "dist/gen/MODL",
+    "index.d.ts",
+    "src/scratch.ts"
   ],
   "exclude": [
     "node_modules",
