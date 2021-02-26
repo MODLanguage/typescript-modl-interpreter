@@ -3,6 +3,7 @@ node_modules
 .idea
 dist/modl-interpreter
 dist/*.js
+dist/*.js.*
 dist/*.ts
 dist/*.map
 
@@ -10,3 +11,4 @@ dist/*.map
 
 docs
 **/scratch*.ts
+web
