@@ -8,54 +8,56 @@ var grammarFileName = "MODLParser.g4";
 
 
 var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
-    "\u0003\u0010N\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004\u0004\t",
+    "\u0003\u0010Q\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004\u0004\t",
     "\u0004\u0004\u0005\t\u0005\u0004\u0006\t\u0006\u0004\u0007\t\u0007\u0004",
     "\b\t\b\u0003\u0002\u0003\u0002\u0003\u0002\u0007\u0002\u0014\n\u0002",
     "\f\u0002\u000e\u0002\u0017\u000b\u0002\u0003\u0002\u0005\u0002\u001a",
-    "\n\u0002\u0003\u0002\u0003\u0002\u0003\u0003\u0003\u0003\u0003\u0003",
-    "\u0005\u0003!\n\u0003\u0003\u0004\u0003\u0004\u0003\u0004\u0003\u0004",
-    "\u0007\u0004\'\n\u0004\f\u0004\u000e\u0004*\u000b\u0004\u0005\u0004",
-    ",\n\u0004\u0003\u0004\u0003\u0004\u0003\u0005\u0003\u0005\u0003\u0005",
-    "\u0003\u0005\u0007\u00054\n\u0005\f\u0005\u000e\u00057\u000b\u0005\u0005",
-    "\u00059\n\u0005\u0003\u0005\u0003\u0005\u0003\u0006\u0003\u0006\u0003",
-    "\u0006\u0003\u0006\u0003\u0006\u0003\u0006\u0003\u0006\u0005\u0006D",
-    "\n\u0006\u0003\u0007\u0003\u0007\u0003\u0007\u0003\u0007\u0005\u0007",
-    "J\n\u0007\u0003\b\u0003\b\u0003\b\u0002\u0002\t\u0002\u0004\u0006\b",
-    "\n\f\u000e\u0002\u0004\u0003\u0002\u000e\u0010\u0004\u0002\u0004\u0006",
-    "\u000e\u0010\u0002S\u0002\u0010\u0003\u0002\u0002\u0002\u0004 \u0003",
-    "\u0002\u0002\u0002\u0006\"\u0003\u0002\u0002\u0002\b/\u0003\u0002\u0002",
-    "\u0002\nC\u0003\u0002\u0002\u0002\fI\u0003\u0002\u0002\u0002\u000eK",
-    "\u0003\u0002\u0002\u0002\u0010\u0015\u0005\u0004\u0003\u0002\u0011\u0012",
-    "\u0007\b\u0002\u0002\u0012\u0014\u0005\u0004\u0003\u0002\u0013\u0011",
-    "\u0003\u0002\u0002\u0002\u0014\u0017\u0003\u0002\u0002\u0002\u0015\u0013",
-    "\u0003\u0002\u0002\u0002\u0015\u0016\u0003\u0002\u0002\u0002\u0016\u0019",
-    "\u0003\u0002\u0002\u0002\u0017\u0015\u0003\u0002\u0002\u0002\u0018\u001a",
-    "\u0007\b\u0002\u0002\u0019\u0018\u0003\u0002\u0002\u0002\u0019\u001a",
-    "\u0003\u0002\u0002\u0002\u001a\u001b\u0003\u0002\u0002\u0002\u001b\u001c",
-    "\u0007\u0002\u0002\u0003\u001c\u0003\u0003\u0002\u0002\u0002\u001d!",
-    "\u0005\u0006\u0004\u0002\u001e!\u0005\b\u0005\u0002\u001f!\u0005\n\u0006",
-    "\u0002 \u001d\u0003\u0002\u0002\u0002 \u001e\u0003\u0002\u0002\u0002",
-    " \u001f\u0003\u0002\u0002\u0002!\u0005\u0003\u0002\u0002\u0002\"+\u0007",
-    "\n\u0002\u0002#(\u0005\n\u0006\u0002$%\u0007\b\u0002\u0002%\'\u0005",
-    "\n\u0006\u0002&$\u0003\u0002\u0002\u0002\'*\u0003\u0002\u0002\u0002",
-    "(&\u0003\u0002\u0002\u0002()\u0003\u0002\u0002\u0002),\u0003\u0002\u0002",
-    "\u0002*(\u0003\u0002\u0002\u0002+#\u0003\u0002\u0002\u0002+,\u0003\u0002",
-    "\u0002\u0002,-\u0003\u0002\u0002\u0002-.\u0007\u000b\u0002\u0002.\u0007",
-    "\u0003\u0002\u0002\u0002/8\u0007\f\u0002\u000205\u0005\f\u0007\u0002",
-    "12\u0007\b\u0002\u000224\u0005\f\u0007\u000231\u0003\u0002\u0002\u0002",
-    "47\u0003\u0002\u0002\u000253\u0003\u0002\u0002\u000256\u0003\u0002\u0002",
-    "\u000269\u0003\u0002\u0002\u000275\u0003\u0002\u0002\u000280\u0003\u0002",
-    "\u0002\u000289\u0003\u0002\u0002\u00029:\u0003\u0002\u0002\u0002:;\u0007",
-    "\r\u0002\u0002;\t\u0003\u0002\u0002\u0002<=\t\u0002\u0002\u0002=>\u0007",
-    "\u0007\u0002\u0002>D\u0005\f\u0007\u0002?@\u0007\u0010\u0002\u0002@",
-    "D\u0005\u0006\u0004\u0002AB\u0007\u0010\u0002\u0002BD\u0005\b\u0005",
-    "\u0002C<\u0003\u0002\u0002\u0002C?\u0003\u0002\u0002\u0002CA\u0003\u0002",
-    "\u0002\u0002D\u000b\u0003\u0002\u0002\u0002EJ\u0005\u0006\u0004\u0002",
-    "FJ\u0005\b\u0005\u0002GJ\u0005\n\u0006\u0002HJ\u0005\u000e\b\u0002I",
-    "E\u0003\u0002\u0002\u0002IF\u0003\u0002\u0002\u0002IG\u0003\u0002\u0002",
-    "\u0002IH\u0003\u0002\u0002\u0002J\r\u0003\u0002\u0002\u0002KL\t\u0003",
-    "\u0002\u0002L\u000f\u0003\u0002\u0002\u0002\u000b\u0015\u0019 (+58C",
-    "I"].join("");
+    "\n\u0002\u0003\u0002\u0005\u0002\u001d\n\u0002\u0003\u0002\u0003\u0002",
+    "\u0003\u0003\u0003\u0003\u0003\u0003\u0005\u0003$\n\u0003\u0003\u0004",
+    "\u0003\u0004\u0003\u0004\u0003\u0004\u0007\u0004*\n\u0004\f\u0004\u000e",
+    "\u0004-\u000b\u0004\u0005\u0004/\n\u0004\u0003\u0004\u0003\u0004\u0003",
+    "\u0005\u0003\u0005\u0003\u0005\u0003\u0005\u0007\u00057\n\u0005\f\u0005",
+    "\u000e\u0005:\u000b\u0005\u0005\u0005<\n\u0005\u0003\u0005\u0003\u0005",
+    "\u0003\u0006\u0003\u0006\u0003\u0006\u0003\u0006\u0003\u0006\u0003\u0006",
+    "\u0003\u0006\u0005\u0006G\n\u0006\u0003\u0007\u0003\u0007\u0003\u0007",
+    "\u0003\u0007\u0005\u0007M\n\u0007\u0003\b\u0003\b\u0003\b\u0002\u0002",
+    "\t\u0002\u0004\u0006\b\n\f\u000e\u0002\u0004\u0003\u0002\u000f\u0010",
+    "\u0004\u0002\u0004\u0006\u000e\u0010\u0002W\u0002\u001c\u0003\u0002",
+    "\u0002\u0002\u0004#\u0003\u0002\u0002\u0002\u0006%\u0003\u0002\u0002",
+    "\u0002\b2\u0003\u0002\u0002\u0002\nF\u0003\u0002\u0002\u0002\fL\u0003",
+    "\u0002\u0002\u0002\u000eN\u0003\u0002\u0002\u0002\u0010\u0015\u0005",
+    "\u0004\u0003\u0002\u0011\u0012\u0007\b\u0002\u0002\u0012\u0014\u0005",
+    "\u0004\u0003\u0002\u0013\u0011\u0003\u0002\u0002\u0002\u0014\u0017\u0003",
+    "\u0002\u0002\u0002\u0015\u0013\u0003\u0002\u0002\u0002\u0015\u0016\u0003",
+    "\u0002\u0002\u0002\u0016\u0019\u0003\u0002\u0002\u0002\u0017\u0015\u0003",
+    "\u0002\u0002\u0002\u0018\u001a\u0007\b\u0002\u0002\u0019\u0018\u0003",
+    "\u0002\u0002\u0002\u0019\u001a\u0003\u0002\u0002\u0002\u001a\u001d\u0003",
+    "\u0002\u0002\u0002\u001b\u001d\u0005\u000e\b\u0002\u001c\u0010\u0003",
+    "\u0002\u0002\u0002\u001c\u001b\u0003\u0002\u0002\u0002\u001d\u001e\u0003",
+    "\u0002\u0002\u0002\u001e\u001f\u0007\u0002\u0002\u0003\u001f\u0003\u0003",
+    "\u0002\u0002\u0002 $\u0005\u0006\u0004\u0002!$\u0005\b\u0005\u0002\"",
+    "$\u0005\n\u0006\u0002# \u0003\u0002\u0002\u0002#!\u0003\u0002\u0002",
+    "\u0002#\"\u0003\u0002\u0002\u0002$\u0005\u0003\u0002\u0002\u0002%.\u0007",
+    "\n\u0002\u0002&+\u0005\n\u0006\u0002\'(\u0007\b\u0002\u0002(*\u0005",
+    "\n\u0006\u0002)\'\u0003\u0002\u0002\u0002*-\u0003\u0002\u0002\u0002",
+    "+)\u0003\u0002\u0002\u0002+,\u0003\u0002\u0002\u0002,/\u0003\u0002\u0002",
+    "\u0002-+\u0003\u0002\u0002\u0002.&\u0003\u0002\u0002\u0002./\u0003\u0002",
+    "\u0002\u0002/0\u0003\u0002\u0002\u000201\u0007\u000b\u0002\u00021\u0007",
+    "\u0003\u0002\u0002\u00022;\u0007\f\u0002\u000238\u0005\f\u0007\u0002",
+    "45\u0007\b\u0002\u000257\u0005\f\u0007\u000264\u0003\u0002\u0002\u0002",
+    "7:\u0003\u0002\u0002\u000286\u0003\u0002\u0002\u000289\u0003\u0002\u0002",
+    "\u00029<\u0003\u0002\u0002\u0002:8\u0003\u0002\u0002\u0002;3\u0003\u0002",
+    "\u0002\u0002;<\u0003\u0002\u0002\u0002<=\u0003\u0002\u0002\u0002=>\u0007",
+    "\r\u0002\u0002>\t\u0003\u0002\u0002\u0002?@\t\u0002\u0002\u0002@A\u0007",
+    "\u0007\u0002\u0002AG\u0005\f\u0007\u0002BC\u0007\u0010\u0002\u0002C",
+    "G\u0005\u0006\u0004\u0002DE\u0007\u0010\u0002\u0002EG\u0005\b\u0005",
+    "\u0002F?\u0003\u0002\u0002\u0002FB\u0003\u0002\u0002\u0002FD\u0003\u0002",
+    "\u0002\u0002G\u000b\u0003\u0002\u0002\u0002HM\u0005\u0006\u0004\u0002",
+    "IM\u0005\b\u0005\u0002JM\u0005\n\u0006\u0002KM\u0005\u000e\b\u0002L",
+    "H\u0003\u0002\u0002\u0002LI\u0003\u0002\u0002\u0002LJ\u0003\u0002\u0002",
+    "\u0002LK\u0003\u0002\u0002\u0002M\r\u0003\u0002\u0002\u0002NO\t\u0003",
+    "\u0002\u0002O\u000f\u0003\u0002\u0002\u0002\f\u0015\u0019\u001c#+.8",
+    ";FL"].join("");
 
 
 var atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
@@ -137,6 +139,10 @@ ModlContext.prototype.EOF = function() {
     return this.getToken(MODLParser.EOF, 0);
 };
 
+ModlContext.prototype.modl_primitive = function() {
+    return this.getTypedRuleContext(Modl_primitiveContext,0);
+};
+
 ModlContext.prototype.modl_structure = function(i) {
     if(i===undefined) {
         i = null;
@@ -192,32 +198,45 @@ MODLParser.prototype.modl = function() {
     var _la = 0; // Token type
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 14;
-        this.modl_structure();
-        this.state = 19;
+        this.state = 26;
         this._errHandler.sync(this);
-        var _alt = this._interp.adaptivePredict(this._input,0,this._ctx)
-        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-            if(_alt===1) {
-                this.state = 15;
-                this.match(MODLParser.STRUCT_SEP);
-                this.state = 16;
-                this.modl_structure(); 
-            }
-            this.state = 21;
+        var la_ = this._interp.adaptivePredict(this._input,2,this._ctx);
+        switch(la_) {
+        case 1:
+            this.state = 14;
+            this.modl_structure();
+            this.state = 19;
             this._errHandler.sync(this);
-            _alt = this._interp.adaptivePredict(this._input,0,this._ctx);
-        }
+            var _alt = this._interp.adaptivePredict(this._input,0,this._ctx)
+            while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+                if(_alt===1) {
+                    this.state = 15;
+                    this.match(MODLParser.STRUCT_SEP);
+                    this.state = 16;
+                    this.modl_structure(); 
+                }
+                this.state = 21;
+                this._errHandler.sync(this);
+                _alt = this._interp.adaptivePredict(this._input,0,this._ctx);
+            }
 
-        this.state = 23;
-        this._errHandler.sync(this);
-        _la = this._input.LA(1);
-        if(_la===MODLParser.STRUCT_SEP) {
-            this.state = 22;
-            this.match(MODLParser.STRUCT_SEP);
-        }
+            this.state = 23;
+            this._errHandler.sync(this);
+            _la = this._input.LA(1);
+            if(_la===MODLParser.STRUCT_SEP) {
+                this.state = 22;
+                this.match(MODLParser.STRUCT_SEP);
+            }
 
-        this.state = 25;
+            break;
+
+        case 2:
+            this.state = 25;
+            this.modl_primitive();
+            break;
+
+        }
+        this.state = 28;
         this.match(MODLParser.EOF);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -292,24 +311,23 @@ MODLParser.prototype.modl_structure = function() {
     var localctx = new Modl_structureContext(this, this._ctx, this.state);
     this.enterRule(localctx, 2, MODLParser.RULE_modl_structure);
     try {
-        this.state = 30;
+        this.state = 33;
         this._errHandler.sync(this);
         switch(this._input.LA(1)) {
         case MODLParser.LBRAC:
             this.enterOuterAlt(localctx, 1);
-            this.state = 27;
+            this.state = 30;
             this.modl_map();
             break;
         case MODLParser.LSBRAC:
             this.enterOuterAlt(localctx, 2);
-            this.state = 28;
+            this.state = 31;
             this.modl_array();
             break;
-        case MODLParser.NUMBER:
         case MODLParser.QUOTED:
         case MODLParser.STRING:
             this.enterOuterAlt(localctx, 3);
-            this.state = 29;
+            this.state = 32;
             this.modl_pair();
             break;
         default:
@@ -409,29 +427,29 @@ MODLParser.prototype.modl_map = function() {
     var _la = 0; // Token type
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 32;
+        this.state = 35;
         this.match(MODLParser.LBRAC);
-        this.state = 41;
+        this.state = 44;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
-        if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << MODLParser.NUMBER) | (1 << MODLParser.QUOTED) | (1 << MODLParser.STRING))) !== 0)) {
-            this.state = 33;
+        if(_la===MODLParser.QUOTED || _la===MODLParser.STRING) {
+            this.state = 36;
             this.modl_pair();
-            this.state = 38;
+            this.state = 41;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
             while(_la===MODLParser.STRUCT_SEP) {
-                this.state = 34;
+                this.state = 37;
                 this.match(MODLParser.STRUCT_SEP);
-                this.state = 35;
+                this.state = 38;
                 this.modl_pair();
-                this.state = 40;
+                this.state = 43;
                 this._errHandler.sync(this);
                 _la = this._input.LA(1);
             }
         }
 
-        this.state = 43;
+        this.state = 46;
         this.match(MODLParser.RBRAC);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -527,29 +545,29 @@ MODLParser.prototype.modl_array = function() {
     var _la = 0; // Token type
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 45;
+        this.state = 48;
         this.match(MODLParser.LSBRAC);
-        this.state = 54;
+        this.state = 57;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
         if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << MODLParser.NULL) | (1 << MODLParser.TRUE) | (1 << MODLParser.FALSE) | (1 << MODLParser.LBRAC) | (1 << MODLParser.LSBRAC) | (1 << MODLParser.NUMBER) | (1 << MODLParser.QUOTED) | (1 << MODLParser.STRING))) !== 0)) {
-            this.state = 46;
+            this.state = 49;
             this.modl_value();
-            this.state = 51;
+            this.state = 54;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
             while(_la===MODLParser.STRUCT_SEP) {
-                this.state = 47;
+                this.state = 50;
                 this.match(MODLParser.STRUCT_SEP);
-                this.state = 48;
+                this.state = 51;
                 this.modl_value();
-                this.state = 53;
+                this.state = 56;
                 this._errHandler.sync(this);
                 _la = this._input.LA(1);
             }
         }
 
-        this.state = 56;
+        this.state = 59;
         this.match(MODLParser.RSBRAC);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -598,10 +616,6 @@ Modl_pairContext.prototype.QUOTED = function() {
     return this.getToken(MODLParser.QUOTED, 0);
 };
 
-Modl_pairContext.prototype.NUMBER = function() {
-    return this.getToken(MODLParser.NUMBER, 0);
-};
-
 Modl_pairContext.prototype.modl_map = function() {
     return this.getTypedRuleContext(Modl_mapContext,0);
 };
@@ -641,40 +655,40 @@ MODLParser.prototype.modl_pair = function() {
     this.enterRule(localctx, 8, MODLParser.RULE_modl_pair);
     var _la = 0; // Token type
     try {
-        this.state = 65;
+        this.state = 68;
         this._errHandler.sync(this);
-        var la_ = this._interp.adaptivePredict(this._input,7,this._ctx);
+        var la_ = this._interp.adaptivePredict(this._input,8,this._ctx);
         switch(la_) {
         case 1:
             this.enterOuterAlt(localctx, 1);
-            this.state = 58;
+            this.state = 61;
             _la = this._input.LA(1);
-            if(!((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << MODLParser.NUMBER) | (1 << MODLParser.QUOTED) | (1 << MODLParser.STRING))) !== 0))) {
+            if(!(_la===MODLParser.QUOTED || _la===MODLParser.STRING)) {
             this._errHandler.recoverInline(this);
             }
             else {
             	this._errHandler.reportMatch(this);
                 this.consume();
             }
-            this.state = 59;
+            this.state = 62;
             this.match(MODLParser.EQUALS);
-            this.state = 60;
+            this.state = 63;
             this.modl_value();
             break;
 
         case 2:
             this.enterOuterAlt(localctx, 2);
-            this.state = 61;
+            this.state = 64;
             this.match(MODLParser.STRING);
-            this.state = 62;
+            this.state = 65;
             this.modl_map();
             break;
 
         case 3:
             this.enterOuterAlt(localctx, 3);
-            this.state = 63;
+            this.state = 66;
             this.match(MODLParser.STRING);
-            this.state = 64;
+            this.state = 67;
             this.modl_array();
             break;
 
@@ -756,31 +770,31 @@ MODLParser.prototype.modl_value = function() {
     var localctx = new Modl_valueContext(this, this._ctx, this.state);
     this.enterRule(localctx, 10, MODLParser.RULE_modl_value);
     try {
-        this.state = 71;
+        this.state = 74;
         this._errHandler.sync(this);
-        var la_ = this._interp.adaptivePredict(this._input,8,this._ctx);
+        var la_ = this._interp.adaptivePredict(this._input,9,this._ctx);
         switch(la_) {
         case 1:
             this.enterOuterAlt(localctx, 1);
-            this.state = 67;
+            this.state = 70;
             this.modl_map();
             break;
 
         case 2:
             this.enterOuterAlt(localctx, 2);
-            this.state = 68;
+            this.state = 71;
             this.modl_array();
             break;
 
         case 3:
             this.enterOuterAlt(localctx, 3);
-            this.state = 69;
+            this.state = 72;
             this.modl_pair();
             break;
 
         case 4:
             this.enterOuterAlt(localctx, 4);
-            this.state = 70;
+            this.state = 73;
             this.modl_primitive();
             break;
 
@@ -872,7 +886,7 @@ MODLParser.prototype.modl_primitive = function() {
     var _la = 0; // Token type
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 73;
+        this.state = 76;
         _la = this._input.LA(1);
         if(!((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << MODLParser.NULL) | (1 << MODLParser.TRUE) | (1 << MODLParser.FALSE) | (1 << MODLParser.NUMBER) | (1 << MODLParser.QUOTED) | (1 << MODLParser.STRING))) !== 0))) {
         this._errHandler.recoverInline(this);

@@ -18,8 +18,14 @@ import {
  * @returns modl
  */
 export function visitModl(ctx: any): Modl {
-  const structures = ctx.children.filter(nonTerminal).map(visitModl_structure);
+  // Check for a single primitive value at the root.
+  const children = ctx.children.filter(nonTerminal) as any[];
+  if (children.length === 1 && children[0].__proto__.constructor.name === 'Modl_primitiveContext') {
+    return new Modl(visitModl_primitive(children[0]));
+  }
 
+  // No primitive so it must be a list of structures
+  const structures = children.map(visitModl_structure);
   return new Modl(structures);
 }
 

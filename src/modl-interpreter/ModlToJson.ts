@@ -17,24 +17,28 @@ import { createStringEscapeReplacer } from './Utils';
  * @returns to json
  */
 export function modlToJson(modl: Modl): object | null {
-  if (modl.s.length === 1 && modl.s[0] instanceof ModlArray) {
-    return arrayToJson(modl.s[0]);
+  if (modl.s instanceof Array) {
+    if (modl.s.length === 1 && modl.s[0] instanceof ModlArray) {
+      return arrayToJson(modl.s[0]);
+    } else {
+      const result = {};
+
+      modl.s.forEach((structure) => {
+        if (structure instanceof ModlPair) {
+          pairToJson(structure, result);
+        }
+        if (structure instanceof ModlMap) {
+          mapToJson(structure, result);
+        }
+        if (structure instanceof ModlArray) {
+          throw new Error('Array cannot be stored directly in a map, it must be a pair');
+        }
+      });
+
+      return Object.keys(result).length === 0 ? null : result;
+    }
   } else {
-    const result = {};
-
-    modl.s.forEach((structure) => {
-      if (structure instanceof ModlPair) {
-        pairToJson(structure, result);
-      }
-      if (structure instanceof ModlMap) {
-        mapToJson(structure, result);
-      }
-      if (structure instanceof ModlArray) {
-        throw new Error('Array cannot be stored directly in a map, it must be a pair');
-      }
-    });
-
-    return Object.keys(result).length === 0 ? null : result;
+    return toJson(modl.s);
   }
 }
 

@@ -6,7 +6,7 @@
   "configurations": [
     {
       "name": "Launch Program",
-      "program": "${workspaceFolder}/lib/scratch.ts",
+      "program": "${workspaceFolder}/dist/scratch.js",
       "request": "launch",
       "skipFiles": [
         "<node_internals>/**"

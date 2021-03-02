@@ -24,8 +24,7 @@
     "sourceMap": true
   },
   "include": [
-    "lib",
-    "dist/gen/MODL",
+    "src",
     "index.d.ts"
   ],
   "exclude": [

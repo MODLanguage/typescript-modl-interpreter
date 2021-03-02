@@ -2,7 +2,7 @@
  * Modl
  */
 export class Modl {
-  constructor(readonly s: ModlStructure[]) {}
+  constructor(readonly s: ModlStructure[] | ModlPrimitive) {}
 }
 
 export type ModlStructure = ModlMap | ModlArray | ModlPair;
