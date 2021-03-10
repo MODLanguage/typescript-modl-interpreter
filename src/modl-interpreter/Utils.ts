@@ -22,8 +22,16 @@ class StringEscapeReplacerImpl implements StringEscapeReplacer {
 }
 
 const replacements: Map<string, string> = new Map([
-  ['\\%', '%'],
-  ['~%', '%'],
+  ['\\t', '\t'],
+  ['\\n', '\n'],
+  ['\\b', '\b'],
+  ['\\f', '\f'],
+  ['\\r', '\r'],
+  ['~t', '\t'],
+  ['~n', '\n'],
+  ['~b', '\b'],
+  ['~f', '\f'],
+  ['~r', '\r'],
   ['~\\', '\\'],
   ['\\\\', '\\'],
   ['~~', '~'],
@@ -62,11 +70,6 @@ const replacements: Map<string, string> = new Map([
   ['\\!', '!'],
   ['~|', '|'],
   ['\\|', '|'],
-  ['\\t', '\t'],
-  ['\\n', '\n'],
-  ['\\b', '\b'],
-  ['\\f', '\f'],
-  ['\\r', '\r'],
 ]);
 
 const BACKSLASH_U = '\\u';
