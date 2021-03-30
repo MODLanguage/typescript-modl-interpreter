@@ -1,7 +1,6 @@
 import { CommonTokenStream, InputStream, Lexer, Recognizer } from 'antlr4';
 import { ErrorListener } from 'antlr4/error/ErrorListener';
-import { MODLLexer } from '../../dist/gen/MODL/MODLLexer';
-import { MODLParser } from '../../dist/gen/MODL/MODLParser';
+import * as modl from 'modl-parser';
 import { Modl } from './Model';
 import { visitModl } from './ModlParsedVisitor';
 
@@ -16,9 +15,9 @@ export class Parser {
    */
   parse(s: string): Modl {
     const inputStream = new InputStream(s);
-    const lexer = new MODLLexer(inputStream) as Lexer;
+    const lexer = new modl.MODLLexer(inputStream) as Lexer;
     const commonTokenStream = new CommonTokenStream(lexer);
-    const parser = new MODLParser(commonTokenStream);
+    const parser = new modl.MODLParser(commonTokenStream);
 
     lexer.addErrorListener(ThrowingErrorListener.INSTANCE);
     parser.addErrorListener(ThrowingErrorListener.INSTANCE);
@@ -37,7 +36,7 @@ export class ParseCancellationException implements Error {
    * @param message
    * @param name
    */
-  constructor(readonly message: string, readonly name: string) { }
+  constructor(readonly message: string, readonly name: string) {}
 }
 
 /**

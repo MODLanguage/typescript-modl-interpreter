@@ -1,8 +1,8 @@
 {
   "name": "modl-interpreter",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A MODL interpreter in TypeScript",
-  "main": "dist/index.js",
+  "main": "index.js",
   "types": "dist/index.d.ts",
   "dependencies": {
     "@types/antlr4": "^4.7.2",
@@ -11,6 +11,7 @@
     "fs": "0.0.1-security",
     "loglevel": "^1.7.0",
     "loglevel-plugin-prefix": "^0.8.4",
+    "modl-parser": "0.0.7",
     "ts-loader": "^7.0.5",
     "typescript": "^4.0.2"
   },
