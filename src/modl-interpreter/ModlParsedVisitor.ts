@@ -1,3 +1,12 @@
+import { TerminalNode } from 'antlr4ts/tree/TerminalNode';
+import {
+  ModlContext,
+  Modl_arrayContext,
+  Modl_mapContext,
+  Modl_pairContext,
+  Modl_primitiveContext,
+  Modl_valueContext,
+} from '../grammar/antlr4/MODLParser';
 import {
   Modl,
   ModlArray,
@@ -17,16 +26,19 @@ import {
  * @param ctx
  * @returns modl
  */
-export function visitModl(ctx: any): Modl {
+export function visitModl(ctx: ModlContext): Modl {
   // Check for a single primitive value at the root.
-  const children = ctx.children.filter(nonTerminal) as any[];
+  const children = ctx.children?.filter(nonTerminal) as any[];
   if (children.length === 1 && children[0].__proto__.constructor.name === 'Modl_primitiveContext') {
     return new Modl(visitModl_primitive(children[0]));
   }
 
   // No primitive so it must be a list of structures
   const structures = children.map(visitModl_structure);
-  return new Modl(structures);
+  if (structures) {
+    return new Modl(structures as Array<ModlStructure>);
+  }
+  return new Modl(new Array<ModlStructure>());
 }
 
 /**
@@ -35,7 +47,7 @@ export function visitModl(ctx: any): Modl {
  * @returns true if terminal
  */
 function nonTerminal(ctx: any): boolean {
-  return ctx.__proto__.constructor.name !== 'TerminalNodeImpl';
+  return ctx.__proto__.constructor.name !== 'TerminalNode';
 }
 
 /**
@@ -43,7 +55,7 @@ function nonTerminal(ctx: any): boolean {
  * @param ctx
  * @returns modl structure
  */
-function visitModl_structure(ctx: any): ModlStructure {
+function visitModl_structure(ctx: any): ModlStructure | undefined {
   const ctxClassName = ctx.__proto__.constructor.name;
 
   switch (ctxClassName) {
@@ -68,10 +80,13 @@ function visitModl_structure(ctx: any): ModlStructure {
  * @param ctx
  * @returns modl map
  */
-function visitModl_map(ctx: any): ModlMap {
-  const children = ctx.children.filter(nonTerminal).map(visitChild);
+function visitModl_map(ctx: Modl_mapContext): ModlMap | undefined {
+  const children = ctx.children?.filter(nonTerminal).map(visitChild);
 
-  return new ModlMap(children);
+  if (children) {
+    return new ModlMap(children as ModlPair[]);
+  }
+  return;
 }
 
 /**
@@ -79,9 +94,12 @@ function visitModl_map(ctx: any): ModlMap {
  * @param ctx
  * @returns modl array
  */
-function visitModl_array(ctx: any): ModlArray {
-  const children = ctx.children.filter(nonTerminal).map(visitChild);
-  return new ModlArray(children);
+function visitModl_array(ctx: Modl_arrayContext): ModlArray | undefined {
+  const children = ctx.children?.filter(nonTerminal).map(visitChild);
+  if (children) {
+    return new ModlArray(children as ModlValue[]);
+  }
+  return;
 }
 
 /**
@@ -89,14 +107,17 @@ function visitModl_array(ctx: any): ModlArray {
  * @param ctx
  * @returns modl pair
  */
-function visitModl_pair(ctx: any): ModlPair {
-  const key = ctx.children[0].getText();
+function visitModl_pair(ctx: Modl_pairContext): ModlPair | undefined {
+  if (!ctx.children) {
+    return;
+  }
+  const key = ctx.children[0].text;
 
   validateKey(key);
 
-  const value = ctx.children[1].__proto__.constructor.name === 'TerminalNodeImpl' ? ctx.children[2] : ctx.children[1];
+  const value = ctx.children[1] instanceof TerminalNode ? ctx.children[2] : ctx.children[1];
 
-  const pairValue: ModlValue = visitChild(value);
+  const pairValue: ModlValue = visitChild(value) as ModlValue;
 
   return new ModlPair(key, pairValue);
 }
@@ -106,8 +127,12 @@ function visitModl_pair(ctx: any): ModlPair {
  * @param ctx
  * @returns modl value
  */
-function visitModl_value(ctx: any): ModlValue {
-  return visitChild(ctx.children[0]);
+function visitModl_value(ctx: Modl_valueContext): ModlValue | undefined {
+  const children = ctx.children;
+  if (children) {
+    return visitChild(children[0]);
+  }
+  return;
 }
 
 /**
@@ -115,8 +140,9 @@ function visitModl_value(ctx: any): ModlValue {
  * @param ctx
  * @returns modl primitive
  */
-function visitModl_primitive(ctx: any): ModlPrimitive {
-  const text = ctx.getText();
+function visitModl_primitive(ctx: Modl_primitiveContext): ModlPrimitive {
+  const text = ctx.text;
+
   if (!text || text === 'null' || text === '000') {
     return ModlBoolNull.ModlNull;
   }

@@ -12,7 +12,7 @@
     },
     "new-parens": true,
     "no-arg": true,
-    "no-bitwise": true,
+    "no-bitwise": false,
     "no-conditional-assignment": true,
     "no-consecutive-blank-lines": true,
     "no-console": {
@@ -46,7 +46,7 @@
     "restrict-plus-operands": true,
     "static-this": true,
     "strict-type-predicates": true,
-    "switch-default": true,
+    "switch-default": false,
     "triple-equals": true,
     "cyclomatic-complexity": [
       true,
@@ -54,7 +54,8 @@
     ],
     "array-type": false,
     "arrow-return-shorthand": true,
-    "class-name": true,
+    "class-name": false,
+    "variable-name": false,
     "comment-format": true,
     "interface-over-type-literal": true,
     "newline-per-chained-call": false,

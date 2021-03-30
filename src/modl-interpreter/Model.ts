@@ -15,7 +15,7 @@ export class ModlMap {
  * Modl array
  */
 export class ModlArray {
-  constructor(readonly items: [ModlValue]) {}
+  constructor(readonly items: ModlValue[]) {}
 }
 
 /**

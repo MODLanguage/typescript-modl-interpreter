@@ -1,6 +1,6 @@
-import { CommonTokenStream, InputStream, Lexer, Recognizer } from 'antlr4';
-import { ErrorListener } from 'antlr4/error/ErrorListener';
-import * as modl from 'modl-parser';
+import { ANTLRErrorListener, CharStreams, CommonTokenStream } from 'antlr4ts';
+import { MODLLexer } from '../grammar/antlr4/MODLLexer';
+import { MODLParser } from '../grammar/antlr4/MODLParser';
 import { Modl } from './Model';
 import { visitModl } from './ModlParsedVisitor';
 
@@ -14,10 +14,10 @@ export class Parser {
    * @returns parse
    */
   parse(s: string): Modl {
-    const inputStream = new InputStream(s);
-    const lexer = new modl.MODLLexer(inputStream) as Lexer;
+    const inputStream = CharStreams.fromString(s);
+    const lexer = new MODLLexer(inputStream);
     const commonTokenStream = new CommonTokenStream(lexer);
-    const parser = new modl.MODLParser(commonTokenStream);
+    const parser = new MODLParser(commonTokenStream);
 
     lexer.addErrorListener(ThrowingErrorListener.INSTANCE);
     parser.addErrorListener(ThrowingErrorListener.INSTANCE);
@@ -42,7 +42,7 @@ export class ParseCancellationException implements Error {
 /**
  * Throwing error listener
  */
-class ThrowingErrorListener extends ErrorListener {
+class ThrowingErrorListener implements ANTLRErrorListener<string> {
   public static INSTANCE: ThrowingErrorListener = new ThrowingErrorListener();
 
   /**
@@ -53,7 +53,7 @@ class ThrowingErrorListener extends ErrorListener {
    * @param column
    * @param msg
    */
-  syntaxError(recognizer: Recognizer, offendingSymbol: any, line: number, column: number, msg: string) {
+  syntaxError(recognizer: any, offendingSymbol: any, line: number, column: number, msg: string) {
     if (recognizer) {
       const message = `line ${line}:${column} ${msg} ${offendingSymbol}`;
       throw new ParseCancellationException(message, 'Syntax Error');

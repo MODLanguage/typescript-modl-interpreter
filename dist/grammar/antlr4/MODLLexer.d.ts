@@ -1,0 +1,36 @@
+import { ATN } from 'antlr4ts/atn/ATN';
+import { CharStream } from 'antlr4ts/CharStream';
+import { Lexer } from 'antlr4ts/Lexer';
+import { Vocabulary } from 'antlr4ts/Vocabulary';
+export declare class MODLLexer extends Lexer {
+    static readonly WS = 1;
+    static readonly NULL = 2;
+    static readonly TRUE = 3;
+    static readonly FALSE = 4;
+    static readonly EQUALS = 5;
+    static readonly STRUCT_SEP = 6;
+    static readonly ARR_SEP = 7;
+    static readonly LBRAC = 8;
+    static readonly RBRAC = 9;
+    static readonly LSBRAC = 10;
+    static readonly RSBRAC = 11;
+    static readonly NUMBER = 12;
+    static readonly QUOTED = 13;
+    static readonly STRING = 14;
+    static readonly channelNames: string[];
+    static readonly modeNames: string[];
+    static readonly ruleNames: string[];
+    private static readonly _LITERAL_NAMES;
+    private static readonly _SYMBOLIC_NAMES;
+    static readonly VOCABULARY: Vocabulary;
+    get vocabulary(): Vocabulary;
+    constructor(input: CharStream);
+    get grammarFileName(): string;
+    get ruleNames(): string[];
+    get serializedATN(): string;
+    get channelNames(): string[];
+    get modeNames(): string[];
+    static readonly _serializedATN: string;
+    static __ATN: ATN;
+    static get _ATN(): ATN;
+}
