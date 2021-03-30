@@ -1,6 +1,6 @@
 {
   "name": "modl-interpreter",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A MODL interpreter in TypeScript",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -49,9 +49,6 @@
   },
   "files": [
     "dist/**/*",
-    "src/**/*",
-    "index.d.ts",
-    "index.js",
-    "gen/**/*"
+    "index.js"
   ]
 }
