@@ -37,7 +37,7 @@ export class ParseCancellationException implements Error {
    * @param message
    * @param name
    */
-  constructor(readonly message: string, readonly name: string) {}
+  constructor(readonly message: string, readonly name: string) { }
 }
 
 /**
