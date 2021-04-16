@@ -112,29 +112,7 @@ function mapToJson(m: ModlMap, result: object): object {
  */
 function arrayToJson(a: ModlArray): object {
   const result = new Array();
-  a.items.forEach((x) => {
-    if (x instanceof ModlArray) {
-      result.push(arrayToJson(x));
-    } else if (x instanceof ModlMap) {
-      result.push(mapToJson(x, {}));
-    } else if (x instanceof ModlPair) {
-      result.push(pairToJson(x, {}));
-    } else if (x instanceof ModlQuoted) {
-      result.push(stringEscapeReplacer.replace(unquote(x.value)));
-    } else if (x instanceof ModlNumber) {
-      result.push(x.value);
-    } else if (x instanceof ModlString) {
-      result.push(stringEscapeReplacer.replace(unquote(x.value)));
-    } else if (x === ModlBoolNull.ModlFalse) {
-      result.push(false);
-    } else if (x === ModlBoolNull.ModlTrue) {
-      result.push(true);
-    } else if (x === ModlBoolNull.ModlNull) {
-      result.push(null);
-    } else {
-      result.push(x);
-    }
-  });
+  a.items.forEach((x) => result.push(toJson(x)));
   return result;
 }
 

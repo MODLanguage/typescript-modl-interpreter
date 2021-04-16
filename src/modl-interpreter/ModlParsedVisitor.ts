@@ -5,6 +5,7 @@ import {
   Modl_mapContext,
   Modl_pairContext,
   Modl_primitiveContext,
+  Modl_structureContext,
   Modl_valueContext,
 } from '../grammar/antlr4/MODLParser';
 import {
@@ -29,7 +30,7 @@ import {
 export function visitModl(ctx: ModlContext): Modl {
   // Check for a single primitive value at the root.
   const children = ctx.children?.filter(nonTerminal) as any[];
-  if (children.length === 1 && children[0].__proto__.constructor.name === 'Modl_primitiveContext') {
+  if (children.length === 1 && children[0] instanceof Modl_primitiveContext) {
     return new Modl(visitModl_primitive(children[0]));
   }
 
@@ -47,7 +48,7 @@ export function visitModl(ctx: ModlContext): Modl {
  * @returns true if terminal
  */
 function nonTerminal(ctx: any): boolean {
-  return ctx.__proto__.constructor.name !== 'TerminalNode';
+  return !(ctx instanceof TerminalNode);
 }
 
 /**
@@ -56,21 +57,19 @@ function nonTerminal(ctx: any): boolean {
  * @returns modl structure
  */
 function visitModl_structure(ctx: any): ModlStructure | undefined {
-  const ctxClassName = ctx.__proto__.constructor.name;
-
-  switch (ctxClassName) {
-    case 'Modl_mapContext':
-      return visitModl_map(ctx);
-    case 'Modl_arrayContext':
-      return visitModl_array(ctx);
-    case 'Modl_pairContext':
-      return visitModl_pair(ctx);
-    case 'Modl_structureContext':
-      if (ctx.children.length === 1) {
-        return visitModl_structure(ctx.children[0]);
-      }
-      break;
-    default: // fall through
+  if (ctx instanceof Modl_mapContext) {
+    return visitModl_map(ctx);
+  }
+  if (ctx instanceof Modl_arrayContext) {
+    return visitModl_array(ctx);
+  }
+  if (ctx instanceof Modl_pairContext) {
+    return visitModl_pair(ctx);
+  }
+  if (ctx instanceof Modl_structureContext) {
+    if (ctx?.children?.length === 1) {
+      return visitModl_structure(ctx.children[0]);
+    }
   }
   return new ModlMap(new Array<ModlMapItem>());
 }
@@ -169,25 +168,27 @@ function visitModl_primitive(ctx: Modl_primitiveContext): ModlPrimitive {
  * @returns
  */
 function visitChild(child: any) {
-  const childClassName = child.__proto__.constructor.name;
-
-  switch (childClassName) {
-    case 'Modl_structureContext':
-      return visitModl_structure(child);
-    case 'Modl_mapContext':
-      return visitModl_map(child);
-    case 'Modl_arrayContext':
-      return visitModl_array(child);
-    case 'Modl_pairContext':
-      return visitModl_pair(child);
-    case 'Modl_valueContext':
-      return visitModl_value(child);
-    case 'Modl_primitiveContext':
-      return visitModl_primitive(child);
-    default:
-      console.error(`Unknown object: ${childClassName}`);
-      return new ModlString(`Unknown object: ${childClassName}`);
+  if (child instanceof Modl_structureContext) {
+    return visitModl_structure(child);
   }
+  if (child instanceof Modl_mapContext) {
+    return visitModl_map(child);
+  }
+  if (child instanceof Modl_arrayContext) {
+    return visitModl_array(child);
+  }
+  if (child instanceof Modl_pairContext) {
+    return visitModl_pair(child);
+  }
+  if (child instanceof Modl_valueContext) {
+    return visitModl_value(child);
+  }
+  if (child instanceof Modl_primitiveContext) {
+    return visitModl_primitive(child);
+  }
+  const childStr = JSON.stringify(child);
+  console.error(`Unknown object: ${childStr}`);
+  return new ModlString(`Unknown object: ${childStr}`);
 }
 
 /**

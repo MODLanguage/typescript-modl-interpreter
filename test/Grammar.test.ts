@@ -33,12 +33,12 @@ describe('Grammar - compliance level 0', () => {
         try {
           const result = new Interpreter().interpretToJsonString(test.input);
 
-          const same = deepEql(test.expected_output, result) as boolean;
+          const same = deepEql(JSON.parse(test.expected_output), JSON.parse(result)) as boolean;
 
           if (!same) {
             console.log(`Error for test : ${test.id}`);
-            console.log('expected: ' + JSON.stringify(test.expected_output));
-            console.log('received: ' + JSON.stringify(result));
+            console.log('expected: ' + test.expected_output);
+            console.log('received: ' + result);
           }
           overallResult &&= same;
         } catch (e) {
@@ -60,12 +60,12 @@ describe('Grammar - compliance level 0', () => {
         try {
           const result = new Interpreter().interpretToJsonString(test.input);
 
-          const same = deepEql(test.expected_output, result) as boolean;
+          const same = deepEql(JSON.parse(test.expected_output), JSON.parse(result)) as boolean;
 
           if (!same) {
             console.log(`Error for test : ${test.id}`);
-            console.log('expected: ' + JSON.stringify(test.expected_output));
-            console.log('received: ' + JSON.stringify(result));
+            console.log('expected: ' + test.expected_output);
+            console.log('received: ' + result);
           }
           overallResult &&= same;
         } catch (e) {
