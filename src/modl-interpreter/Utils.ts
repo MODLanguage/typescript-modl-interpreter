@@ -177,7 +177,7 @@ const hasEnoughDigits = (s: string, idx: number, n: number): boolean => {
  */
 const tryParse = (str: string, idx: number): TryParseResult => {
   // Check for a 6-digit unicode value
-  if (hasEnoughDigits(str, idx, 6)) {
+  if (hasEnoughDigits(str, idx, 6) && str.substring(idx, idx + 2) !== '00') {
     const value = getPossibleUnicodeValue(str, idx, 6);
     if (isValidRange(value)) {
       return new TryParseResult(value, 6);
@@ -185,7 +185,7 @@ const tryParse = (str: string, idx: number): TryParseResult => {
   }
 
   // Check for a 5-digit unicode value
-  if (hasEnoughDigits(str, idx, 5)) {
+  if (hasEnoughDigits(str, idx, 5) && str.substring(idx, idx + 2) !== '00') {
     const value = getPossibleUnicodeValue(str, idx, 5);
     if (isValidRange(value)) {
       return new TryParseResult(value, 5);
