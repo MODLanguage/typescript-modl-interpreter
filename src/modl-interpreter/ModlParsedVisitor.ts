@@ -142,13 +142,13 @@ function visitModl_value(ctx: Modl_valueContext): ModlValue | undefined {
 function visitModl_primitive(ctx: Modl_primitiveContext): ModlPrimitive {
   const text = ctx.text;
 
-  if (!text || text === 'null' || text === '000') {
+  if (!text || text === 'null') {
     return ModlBoolNull.ModlNull;
   }
-  if (text === 'false' || text === '00') {
+  if (text === 'false') {
     return ModlBoolNull.ModlFalse;
   }
-  if (text === 'true' || text === '01') {
+  if (text === 'true') {
     return ModlBoolNull.ModlTrue;
   }
   const intValue = Number.parseInt(text, 10);
