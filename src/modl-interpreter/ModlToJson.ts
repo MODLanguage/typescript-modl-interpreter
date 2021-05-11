@@ -2,13 +2,14 @@ import {
   Modl,
   ModlArray,
   ModlBoolNull,
+  ModlFloat,
+  ModlInteger,
   ModlMap,
-  ModlNumber,
   ModlPair,
   ModlQuoted,
   ModlString,
   ModlValue,
-} from './Model';
+} from 'modl-parser';
 import { createStringEscapeReplacer } from './Utils';
 
 /**
@@ -60,7 +61,10 @@ function toJson(x: ModlValue): any {
   if (x instanceof ModlQuoted) {
     return stringEscapeReplacer.replace(unquote(x.value));
   }
-  if (x instanceof ModlNumber) {
+  if (x instanceof ModlInteger) {
+    return x.value;
+  }
+  if (x instanceof ModlFloat) {
     return x.value;
   }
   if (x instanceof ModlString) {

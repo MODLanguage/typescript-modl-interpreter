@@ -1,5 +1,5 @@
+import { parser } from 'modl-parser';
 import { modlToJson } from './ModlToJson';
-import { Parser } from './Parser';
 
 /**
  * Interpreter
@@ -41,6 +41,6 @@ export class Interpreter {
    * @returns
    */
   interpret(s: string) {
-    return new Parser().parse(s);
+    return parser(s);
   }
 }

@@ -1,17 +1,13 @@
 {
   "name": "modl-interpreter",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "A MODL interpreter in TypeScript",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "dependencies": {
-    "antlr4ts": "^0.5.0-alpha.4",
-    "fp-ts": "^2.8.2",
-    "fs": "0.0.1-security",
     "loglevel": "^1.7.0",
     "loglevel-plugin-prefix": "^0.8.4",
-    "ts-loader": "^7.0.5",
-    "typescript": "^4.0.2"
+    "modl-parser": "^0.1.7"
   },
   "devDependencies": {
     "@tsconfig/node10": "^1.0.7",
@@ -21,13 +17,15 @@
     "antlr4ts-cli": "^0.5.0-alpha.4",
     "chai": "^4.2.0",
     "deep-eql": "^4.0.0",
+    "fs": "0.0.1-security",
     "mocha": "^8.1.3",
+    "ts-loader": "^7.0.5",
     "ts-node": "^8.10.2",
     "tslint": "^6.1.3",
-    "tslint-config-prettier": "^1.18.0"
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^4.0.2"
   },
   "scripts": {
-    "antlr4ts": "antlr4ts -visitor -o ./src/grammar ../grammar/antlr4/MODLLexer.g4 ../grammar/antlr4/MODLParser.g4",
     "test": "mocha --require ts-node/register 'test/**/*.ts'",
     "debug": "mocha --require ts-node/register 'test/**/*.ts'",
     "debug-trace": "mocha --trace-warnings --require ts-node/register 'test/**/*.ts'",
