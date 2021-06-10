@@ -29,6 +29,11 @@ describe('TypeScript Interpreter', () => {
     expect(JSON.stringify(jsonObject)).to.eq('[{"a":"b"}]');
   });
 
+  it('should be able to parse telephone numbers to strings instead of numbers', () => {
+    const jsonObject = new Interpreter().interpretToJsonObject('a=+441270123456');
+    expect(JSON.stringify(jsonObject)).to.eq('{"a":"+441270123456"}');
+  });
+
   it('should be able to throw an Error on invalid MODL', () => {
     let interpreter = new Interpreter();
     expect(interpreter.interpretToJsonObject.bind(interpreter, 'a;b')).to.throw();
