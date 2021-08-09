@@ -1,13 +1,13 @@
 {
   "name": "modl-interpreter",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "A MODL interpreter in TypeScript",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "dependencies": {
     "loglevel": "^1.7.0",
     "loglevel-plugin-prefix": "^0.8.4",
-    "modl-parser": "^0.1.12"
+    "modl-parser": "^0.1.13"
   },
   "devDependencies": {
     "@tsconfig/node10": "^1.0.7",
