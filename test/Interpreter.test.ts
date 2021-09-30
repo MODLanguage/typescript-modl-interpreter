@@ -34,6 +34,21 @@ describe('TypeScript Interpreter', () => {
     expect(JSON.stringify(jsonObject)).to.eq('{"a":"+441270123456"}');
   });
 
+  it('should be able to parse zero-prefixed numbers to strings instead of numbers', () => {
+    const jsonObject = new Interpreter().interpretToJsonObject('a=0441270123456');
+    expect(JSON.stringify(jsonObject)).to.eq('{"a":"0441270123456"}');
+  });
+
+  it('should be able to parse integers', () => {
+    const jsonObject = new Interpreter().interpretToJsonObject('a=441270123456');
+    expect(JSON.stringify(jsonObject)).to.eq('{"a":441270123456}');
+  });
+
+  it('should be able to parse floats', () => {
+    const jsonObject = new Interpreter().interpretToJsonObject('a=4.41270123E6');
+    expect(JSON.stringify(jsonObject)).to.eq('{"a":4412701.23}');
+  });
+
   it('should be able to throw an Error on invalid MODL', () => {
     let interpreter = new Interpreter();
     expect(interpreter.interpretToJsonObject.bind(interpreter, 'a;b')).to.throw();
