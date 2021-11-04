@@ -54,17 +54,11 @@ const replacements: Map<string, string> = new Map([
   ['\\=', '='],
 ]);
 
-const BACKSLASH_U = '\\u';
-
-const TILDE_U = '~u';
-
-const TILDE = '~';
-
 const BACKSLASH = '\\';
 
 const HEX = 16;
 
-const digits = '0123456789';
+const UNICODE_SEQ_LEN = 6;
 
 /**
  * Convert explicit unicode escape sequences to unicode characters.
@@ -74,156 +68,41 @@ const digits = '0123456789';
  * @return the string with escape sequences converted to unicode characters.
  */
 const convertUnicodeSequences = (str: string): string => {
+  let m;
   let start = 0;
-  let result = str;
-  while (start < result.length) {
-    // We could have a backslash-u escape sequence or a ~u escape sequence
-    const backslashUIndex = result.indexOf(BACKSLASH_U, start);
-    const tildeUIndex = result.indexOf(TILDE_U, start);
+  let result = '';
+  const reg = /[~\\]u[0-9a-fA-F]{4}/g;
+  do {
+    m = reg.exec(str);
+    if (m) {
+      if (m.index > 0 && (str.charAt(m.index - 1) === '\\' || str.charAt(m.index - 1) === '~')) {
+        // Its escaped so copy over as-is, without the leading slash
+        if (start < m.index - 1) {
+          // Copy up to the slash
+          result += str.substring(start, m.index - 1);
+        }
+        // Copy from after the slash
+        result += str.substring(m.index, (m.index as number) + UNICODE_SEQ_LEN);
 
-    // Filter out cases with no escape sequences.
-    let unicodeStrIdx: number;
-    if (tildeUIndex < 0 && backslashUIndex < 0) {
-      break;
-    } else if (tildeUIndex < 0) {
-      unicodeStrIdx = backslashUIndex; // No ~? Must be backslash
-    } else if (backslashUIndex < 0) {
-      unicodeStrIdx = tildeUIndex; // No backslash? Must be ~
-    } else {
-      // Pick the first escaped character and proceed with that one.
-      unicodeStrIdx = Math.min(backslashUIndex, tildeUIndex);
-    }
+        // Point to the next character after the current escape sequence
+        start = (m.index as number) + UNICODE_SEQ_LEN;
+      } else {
+        if (start < m.index) {
+          // Copy up to the current escape sequence
+          result += str.substring(start, m.index);
+        }
 
-    const tryParseResult = tryParse(result, unicodeStrIdx + 2);
+        // Append the converted character
+        const c = Number.parseInt(m[0].substr(2), HEX);
+        result += String.fromCharCode(c);
 
-    // Next time round the loop we start searching after the current escape sequence.
-    start = unicodeStrIdx + 1;
-
-    // If the escape sequence is itself escaped then don't replace it
-    if (!escapeSequenceIsEscaped(result, unicodeStrIdx)) {
-      // Get the codepoint value and replace the escape sequence
-      if (tryParseResult.codePoint > 0) {
-        const chars = String.fromCodePoint(tryParseResult.codePoint);
-        result = replace(result, chars, unicodeStrIdx, tryParseResult.length + 2);
+        // Point to the next character after the current escape sequence
+        start = (m.index as number) + UNICODE_SEQ_LEN;
       }
+    } else {
+      result += str.substring(start);
     }
-  }
+  } while (m);
+
   return result;
 };
-
-const escapeSequenceIsEscaped = (result: string, unicodeStrIdx: number): boolean => {
-  return (
-    unicodeStrIdx > 0 && (result.charAt(unicodeStrIdx - 1) === TILDE || result.charAt(unicodeStrIdx - 1) === BACKSLASH)
-  );
-};
-
-/**
- * Replace a unicode value in a String
- *
- * @param s             the String with the unicode value to be replaced.
- * @param value         the replacement character
- * @param unicodeStrIdx the index of the unicode escape sequence
- * @param length        the number of characters to be replaced.
- * @return a String with the unicode escape sequence replaced by the replacement character
- */
-const replace = (s: string, value: string, unicodeStrIdx: number, length: number): string => {
-  const left = s.substring(0, unicodeStrIdx);
-  const end = Math.min(s.length, unicodeStrIdx + length);
-  const right = s.substring(end);
-  return left + value + right;
-};
-
-/**
- * Check whether the value is a valid unicode codepoint
- *
- * @param value the int to check
- * @return true if the value is a valid unicode codepoint
- */
-const isValidRange = (value: number): boolean => {
-  return (
-    (value >= 0x100000 && value <= 0x10FFFF) ||
-    (value >= 0x10000 && value <= 0xFFFFF) ||
-    (value >= 0 && value <= 0xD7FF) ||
-    (value >= 0xE000 && value <= 0xFFFF)
-  );
-};
-
-/**
- * Can we get `n` hex digits from the string at the `idx` location?
- *
- * @param s   the String to check
- * @param idx the index to start searching in the string
- * @param n   the number of digits needed
- * @return true if enough digits are available
- */
-const hasEnoughDigits = (s: string, idx: number, n: number): boolean => {
-  let i = 0;
-  while (i < n && idx + i < s.length) {
-    const c = s[idx + i];
-    if (!digits.includes(c) && 'abcdefABCDEF'.indexOf(c) <= -1) {
-      return false;
-    }
-    i++;
-  }
-  return i === n;
-};
-
-/**
- * Attempt to parse a unicode character starting at `idx` in `str`
- *
- * @param str the String to parse
- * @param idx the starting index
- * @return a TryParseResult with codepoint set to 0 on failure.
- */
-const tryParse = (str: string, idx: number): TryParseResult => {
-  // Check for a 6-digit unicode value
-  if (hasEnoughDigits(str, idx, 6) && str.substring(idx, idx + 2) !== '00') {
-    const value = getPossibleUnicodeValue(str, idx, 6);
-    if (isValidRange(value)) {
-      return new TryParseResult(value, 6);
-    }
-  }
-
-  // Check for a 5-digit unicode value
-  if (hasEnoughDigits(str, idx, 5) && str.substring(idx, idx + 2) !== '00') {
-    const value = getPossibleUnicodeValue(str, idx, 5);
-    if (isValidRange(value)) {
-      return new TryParseResult(value, 5);
-    }
-  }
-
-  // Check for a 4-digit unicode value
-  if (hasEnoughDigits(str, idx, 4)) {
-    const value = getPossibleUnicodeValue(str, idx, 4);
-    if (isValidRange(value)) {
-      return new TryParseResult(value, 4);
-    }
-  }
-
-  // Failed
-  return new TryParseResult(0, 4);
-};
-
-const getPossibleUnicodeValue = (str: string, idx: number, i: number): number => {
-  return Number.parseInt(str.substring(idx, idx + i), HEX);
-};
-
-/**
- * Class to hold the result of the tryParse method
- */
-class TryParseResult {
-  readonly codePoint: number;
-
-  readonly length: number;
-
-  /**
-   * Constructor
-   *
-   * @param codePoint the codepoint that was found, or zero
-   * @param length    the number of characters used by the codepoint.
-   */
-  constructor(codePoint: number, length: number) {
-    this.codePoint = codePoint;
-    this.length = length;
-  }
-}
