@@ -5,9 +5,8 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "dependencies": {
-    "loglevel": "^1.7.0",
-    "loglevel-plugin-prefix": "^0.8.4",
-    "modl-parser": "^0.1.16"
+    "modl-parser": "^0.1.16",
+    "pino": "^7.6.5"
   },
   "devDependencies": {
     "@tsconfig/node10": "^1.0.7",
