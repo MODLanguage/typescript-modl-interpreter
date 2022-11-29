@@ -11,11 +11,14 @@ class StringEscapeReplacerImpl implements StringEscapeReplacer {
     let result = convertUnicodeSequences(stringToTransform);
 
     for (let i = 0; i < result.length; i++) {
-      replacements.forEach((v, k) => {
+      for (const entry of replacements.entries()) {
+        const k = entry[0];
+        const v = entry[1];
         if (result.startsWith(k, i)) {
           result = result.substring(0, i) + v + result.substring(i + k.length);
+          break;
         }
-      });
+      }
     }
     return result;
   }
@@ -52,6 +55,8 @@ const replacements: Map<string, string> = new Map([
   ['\\"', '"'],
   ['~=', '='],
   ['\\=', '='],
+  ['~}', '}'],
+  ['\\}', '}'],
 ]);
 
 const BACKSLASH = '\\';

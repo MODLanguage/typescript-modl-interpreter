@@ -53,4 +53,53 @@ describe('TypeScript Interpreter', () => {
     let interpreter = new Interpreter();
     expect(interpreter.interpretToJsonObject.bind(interpreter, 'a;b')).to.throw();
   });
+
+  it('should be able to parse brace-strings - 1', () => {
+    const jsonObject = new Interpreter().interpretToJsonObject('a={4.41270123E6}');
+    expect(JSON.stringify(jsonObject)).to.eq('{"a":"{4.41270123E6}"}');
+  });
+
+  it('should be able to parse brace-strings - 2', () => {
+    const jsonObject = new Interpreter().interpretToJsonObject('a={4.41~}270123E6}');
+    expect(JSON.stringify(jsonObject)).to.eq('{"a":"{4.41}270123E6}"}');
+  });
+
+  it('should be able to parse brace-strings - 3', () => {
+    const jsonObject = new Interpreter().interpretToJsonObject('a={4.41\\}270123E6}');
+    expect(JSON.stringify(jsonObject)).to.eq('{"a":"{4.41}270123E6}"}');
+  });
+
+  it('should be able to parse brace-strings - 4', () => {
+    const jsonObject = new Interpreter().interpretToJsonObject('a={{{{4.41270123E6}');
+    expect(JSON.stringify(jsonObject)).to.eq('{"a":"{{{{4.41270123E6}"}');
+  });
+
+  it('should be able to parse brace-strings - 5', () => {
+    const jsonObject = new Interpreter().interpretToJsonObject(
+      "a={?(typeof($n.l)=='array' {['record' $n.l[2]] ['locale' $locale] ['settings' $settings]~} -> process_contacts {['record' $n.l.c] ['locale' $locale] ['settings' $settings]~} -> process_contacts) }"
+    );
+    expect(JSON.stringify(jsonObject)).to.eq(
+      "{\"a\":\"{?(typeof($n.l)=='array' {['record' $n.l[2]] ['locale' $locale] ['settings' $settings]} -> process_contacts {['record' $n.l.c] ['locale' $locale] ['settings' $settings]} -> process_contacts) }\"}"
+    );
+  });
+
+  it('should be able to parse brace-strings - 6', () => {
+    const jsonObject = new Interpreter().interpretToJsonObject('a={}');
+    expect(JSON.stringify(jsonObject)).to.eq('{"a":"{}"}');
+  });
+
+  it('should be able to parse brace-strings - 7', () => {
+    const jsonObject = new Interpreter().interpretToJsonObject('a={~~}');
+    expect(JSON.stringify(jsonObject)).to.eq('{"a":"{~}"}');
+  });
+
+  it('should be able to parse brace-strings - 8', () => {
+    const jsonObject = new Interpreter().interpretToJsonObject('a={\\\\}');
+    expect(JSON.stringify(jsonObject)).to.eq('{"a":"{\\\\}"}');
+  });
+
+  it('should be able to throw an Error on invalid brace-strings - 1', () => {
+    let interpreter = new Interpreter();
+    expect(interpreter.interpretToJsonObject.bind(interpreter, 'a={;b=c')).to.throw();
+  });
 });
